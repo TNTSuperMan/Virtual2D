@@ -5,11 +5,14 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v2d", "v2d\v2d.vcxproj", "{DB24CF03-07F1-40D4-AEE1-B7F863A2C0B5}"
 EndProject
+<<<<<<< HEAD
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{EAA87614-8F5B-462E-A4E7-281C54F9572E}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+=======
+>>>>>>> 879f16a902b7a43937c9bae1f59473140e0dfa44
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
