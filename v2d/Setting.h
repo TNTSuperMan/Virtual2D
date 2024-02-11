@@ -13,6 +13,10 @@ public:
 	int EyePos; //目の位置
 	int EyeSize; //目の大きさ
 	int EyeKankaku; //目の間隔
+	int BodyFurehaba; //体の振れ幅
+	int HeadFurehaba; //頭の振れ幅
+	int FureSpeed;   //振れ幅スピード ÷1000で実際の値
+	int GetdownMode;  //ゲッダン☆モード
 	Setting();
 };
 

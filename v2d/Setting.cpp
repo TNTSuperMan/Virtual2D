@@ -8,6 +8,7 @@ Setting::Setting() {
 	cfg >> backgroundColor >> BodyY >>
 		BodyCentY >> BodySize >> neckY >>
 		HeadY >> HeadSize >> EyePos >> EyeSize >>
-		EyeKankaku;
+		EyeKankaku >> BodyFurehaba >> HeadFurehaba >>
+		FureSpeed >> GetdownMode;
 	cfg.close();
 }

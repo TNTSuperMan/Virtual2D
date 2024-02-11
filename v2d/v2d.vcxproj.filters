@@ -64,4 +64,7 @@
       <Filter>リソース ファイル</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\x64\Debug\model\model.txt" />
+  </ItemGroup>
 </Project>

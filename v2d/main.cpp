@@ -52,14 +52,19 @@ vtubeloop:;
         }
         ClearDrawScreen();
         DrawBox(0, 0, WIDTH, HEIGHT, stg.backgroundColor, 1);
-        so += 0.05;
+        so += (double)stg.FureSpeed / 1000;
 
 
-        //tDeg = sin(so / 2) * 5;
-        tDeg = rand() % 360;
+        tDeg = sin(so) * stg.BodyFurehaba;
+        head->Rotate = sin(so -1) * stg.HeadFurehaba;
+        if (stg.GetdownMode) {
+            head->Rotate = rand() % 360;
+            tDeg = rand() % 360;
+            body->Pos.x = rand() % WIDTH;
+            body->Pos.y = rand() % HEIGHT;
+        }
         body->Rotate = tDeg;
-        //head->Rotate = sin(so / 2 -1) * 10;
-        head->Rotate = rand() % 360;
+        
         head->Pos = vector(
             sin(tDeg * A_DEG),
             -cos(tDeg * A_DEG)) * 
