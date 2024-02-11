@@ -131,19 +131,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Initializer.cpp" />
+    <ClCompile Include="Setting.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico" />
-    <Image Include="v2d.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="define.h" />
     <ClInclude Include="include.h" />
+    <ClInclude Include="Initializer.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Setting.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
