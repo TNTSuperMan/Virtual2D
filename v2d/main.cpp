@@ -19,7 +19,9 @@ vtubeloop:;
     TCHAR* debug = new TCHAR[255];
     double tDeg = 0;
     int nl = HEIGHT - stg.HeadY;
-
+    int MouseX = 0;
+    int MouseY = 0;
+    vector Mouse;
     resflag = 0;
 
     Sprite* body = new Sprite(BodyImage,
@@ -52,6 +54,7 @@ vtubeloop:;
         }
         ClearDrawScreen();
         DrawBox(0, 0, WIDTH, HEIGHT, stg.backgroundColor, 1);
+        GetMousePoint(&MouseX, &MouseY);
         so += (double)stg.FureSpeed / 1000;
 
 
@@ -64,21 +67,26 @@ vtubeloop:;
             body->Pos.y = rand() % HEIGHT;
         }
         body->Rotate = tDeg;
+        Mouse = vector((double)(MouseX - stg.PointerHoseX) / stg.HeadPointerSize,
+            (double)(MouseY - stg.PointerHoseY) / stg.HeadPointerSize);
         
         head->Pos = vector(
             sin(tDeg * A_DEG),
             -cos(tDeg * A_DEG)) * 
-            (double)nl + vector(WIDTH / 2,HEIGHT);
+            (double)nl + vector(WIDTH / 2,HEIGHT) + Mouse;
+
+        Mouse = vector((double)(MouseX - stg.PointerHoseX) / stg.EyePointerSize,
+                       (double)(MouseY - stg.PointerHoseY) / stg.EyePointerSize);
 
         eye1->Pos = vector(
             sin((head->Rotate + stg.EyeKankaku) * A_DEG),
             -cos((head->Rotate + stg.EyeKankaku) * A_DEG)) *
-            (HEIGHT - stg.EyePos) + head->Pos;
+            (HEIGHT - stg.EyePos) + head->Pos + Mouse;
 
         eye2->Pos = vector(
             sin((head->Rotate - stg.EyeKankaku) * A_DEG),
             -cos((head->Rotate - stg.EyeKankaku) * A_DEG)) *
-            (HEIGHT - stg.EyePos) + head->Pos;
+            (HEIGHT - stg.EyePos) + head->Pos + Mouse;
 
         eye1->Rotate = head->Rotate + stg.EyeKankaku;
         eye2->Rotate = head->Rotate - stg.EyeKankaku;

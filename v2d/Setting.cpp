@@ -9,6 +9,7 @@ Setting::Setting() {
 		BodyCentY >> BodySize >> neckY >>
 		HeadY >> HeadSize >> EyePos >> EyeSize >>
 		EyeKankaku >> BodyFurehaba >> HeadFurehaba >>
-		FureSpeed >> GetdownMode;
+		FureSpeed >> GetdownMode >> EyePointerSize >> 
+		HeadPointerSize >> PointerHoseX >> PointerHoseY;
 	cfg.close();
 }
