@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{EAA87614-8F5B-462E-A4E7-281C54F9572E}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
+		license.md = license.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mtedit", "mtedit\mtedit.csproj", "{1AC175FC-480C-436F-9A3C-8AF5EDDBF9AC}"
