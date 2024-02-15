@@ -26,21 +26,20 @@ vtubeloop:;
 
     Sprite* body = new Sprite(BodyImage,
         vector(WIDTH / 2, stg.BodyY),
-        vector(0, stg.BodyCentY), vector(1, 1),
+        vector(0, stg.BodyCentY), 
         stg.BodySize, 0);
 
     Sprite* head = new Sprite(HeadImage,
         vector(WIDTH / 2, stg.HeadY),
-        vector(0, stg.neckY),
-        vector(1, 1), stg.HeadSize, 0);
+        vector(0, stg.neckY), stg.HeadSize, 0);
 
     Sprite* eye1 = new Sprite(EyeImage,
         vector(0,0),
-        vector(0,0), vector(1, 1), stg.EyeSize, 0);
+        vector(0,0), stg.EyeSize, 0);
 
     Sprite* eye2 = new Sprite(EyeImage,
         vector(0,0),
-        vector(0,0), vector(1, 1), stg.EyeSize, 0, true);
+        vector(0,0),  stg.EyeSize, 0, true);
     
 
     while (CheckHitKey(KEY_INPUT_R));
@@ -59,14 +58,14 @@ vtubeloop:;
 
 
         tDeg = sin(so) * stg.BodyFurehaba;
-        head->Rotate = sin(so -1) * stg.HeadFurehaba;
+        head->Deg = sin(so -1) * stg.HeadFurehaba;
         if (stg.GetdownMode) {
-            head->Rotate = rand() % 360;
+            head->Deg = rand() % 360;
             tDeg = rand() % 360;
             body->Pos.x = rand() % WIDTH;
             body->Pos.y = rand() % HEIGHT;
         }
-        body->Rotate = tDeg;
+        body->Deg = tDeg;
         Mouse = vector((double)(MouseX - stg.PointerHoseX) / stg.HeadPointerSize,
             (double)(MouseY - stg.PointerHoseY) / stg.HeadPointerSize);
         
@@ -79,17 +78,17 @@ vtubeloop:;
                        (double)(MouseY - stg.PointerHoseY) / stg.EyePointerSize);
 
         eye1->Pos = vector(
-            sin((head->Rotate + stg.EyeKankaku) * A_DEG),
-            -cos((head->Rotate + stg.EyeKankaku) * A_DEG)) *
+            sin((head->Deg + stg.EyeKankaku) * A_DEG),
+            -cos((head->Deg + stg.EyeKankaku) * A_DEG)) *
             (HEIGHT - stg.EyePos) + head->Pos + Mouse;
 
         eye2->Pos = vector(
-            sin((head->Rotate - stg.EyeKankaku) * A_DEG),
-            -cos((head->Rotate - stg.EyeKankaku) * A_DEG)) *
+            sin((head->Deg - stg.EyeKankaku) * A_DEG),
+            -cos((head->Deg - stg.EyeKankaku) * A_DEG)) *
             (HEIGHT - stg.EyePos) + head->Pos + Mouse;
 
-        eye1->Rotate = head->Rotate + stg.EyeKankaku;
-        eye2->Rotate = head->Rotate - stg.EyeKankaku;
+        eye1->Deg = head->Deg + stg.EyeKankaku;
+        eye2->Deg = head->Deg - stg.EyeKankaku;
 
 
         head->Draw();

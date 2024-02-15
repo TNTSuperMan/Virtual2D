@@ -4,23 +4,38 @@
 void Sprite::Draw() {
 	vector rp = Pos;
 	vector rc = vector(
-			-cos(Rotate * A_DEG - DX_PI / 2),
-			-sin(Rotate * A_DEG - DX_PI / 2));
+			-cos(Deg * A_DEG - DX_PI / 2),
+			-sin(Deg * A_DEG - DX_PI / 2));
 	rp = rp + rc * Cent.x + rc * Cent.y;
 	DrawRotaGraph(rp.x, rp.y,
 		(double)Size / 100,
-		Rotate * A_DEG,
+		Deg * A_DEG,
 		Image, 1,ishanten ? 1 : 0);
 }
 
-Sprite::Sprite() {};
+Sprite::Sprite() {
+	Image = -1;
+	Pos = vector();
+	Cent = vector();
+	Size = 100;
+	Deg = 0;
+	ishanten = 0;
+};
 
-Sprite::Sprite(int i,vector p, vector c, vector st, int s, double r,bool hanten) {
+Sprite::Sprite(int i) {
+	Image = i;
+	Pos = vector();
+	Cent = vector();
+	Size = 100;
+	Deg = 0;
+	ishanten = 0;
+}
+
+Sprite::Sprite(int i, vector p, vector c, double s, double r, bool hanten = false) {
 	Image = i;
 	Pos = p;
 	Cent = c;
-	Stren = st;
 	Size = s;
-	Rotate = r;
+	Deg = r;
 	ishanten = hanten;
 }
