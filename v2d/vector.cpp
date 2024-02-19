@@ -1,4 +1,5 @@
 #include "vector.h"
+#include "define.h"
 
 vector::vector() {}
 
@@ -22,4 +23,17 @@ vector vector::operator*(double v) {
 
 vector vector::operator/(double v) {
 	return vector(x / v, y / v);
+}
+
+vector TurnV(vector Cent, vector Str, double Deg) {
+	vector t = vector();
+	vector tf = vector(
+		sin(Deg * A_DEG),
+		-cos(Deg * A_DEG));
+	t = t + tf * Str.y;
+	tf = vector(
+		sin((Deg + 90) * A_DEG),
+		-cos((Deg + 90) * A_DEG));
+	t = t + tf * Str.x;
+	return t + Cent;
 }

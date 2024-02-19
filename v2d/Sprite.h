@@ -14,6 +14,5 @@ public:
 	double Deg; //‰ñ“]@360“x‚Åˆê‰ñ“]‚¾Ö
 	virtual void Draw();
 	Sprite();
-	Sprite(int i);
-	Sprite(int i,vector p, vector c, double s, double r,bool hanten = false);
+	Sprite(int i,vector p, vector c, double s, int hanten = 0);
 };

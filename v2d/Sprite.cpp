@@ -22,20 +22,11 @@ Sprite::Sprite() {
 	ishanten = 0;
 };
 
-Sprite::Sprite(int i) {
-	Image = i;
-	Pos = vector();
-	Cent = vector();
-	Size = 100;
-	Deg = 0;
-	ishanten = 0;
-}
-
-Sprite::Sprite(int i, vector p, vector c, double s, double r, bool hanten = false) {
+Sprite::Sprite(int i, vector p, vector c, double s,  int hanten) {
 	Image = i;
 	Pos = p;
 	Cent = c;
 	Size = s;
-	Deg = r;
+	Deg = 0;
 	ishanten = hanten;
 }

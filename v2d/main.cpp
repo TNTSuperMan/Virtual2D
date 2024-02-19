@@ -10,9 +10,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     }
 
     int BodyImage, HeadImage, EyeImage, MouthImage, resflag;
+    Sprite body, head, eye1, eye2;
 
 vtubeloop:;
-
+#pragma region 初期化
     Initializer::Image(BodyImage, HeadImage, EyeImage, MouthImage);
     Setting stg = *(new Setting());
     double so = 0;
@@ -20,29 +21,30 @@ vtubeloop:;
     double tDeg = 0;
     int nl = HEIGHT - stg.HeadY;
     int MouseX = 0;
+    int ep = HEIGHT - stg.EyePos;
     int MouseY = 0;
     vector Mouse;
     resflag = 0;
 
-    Sprite* body = new Sprite(BodyImage,
+    body = *(new Sprite(BodyImage,
         vector(WIDTH / 2, stg.BodyY),
-        vector(0, stg.BodyCentY), 
-        stg.BodySize, 0);
+        vector(0, stg.BodyCentY),
+        stg.BodySize));
 
-    Sprite* head = new Sprite(HeadImage,
-        vector(WIDTH / 2, stg.HeadY),
-        vector(0, stg.neckY), stg.HeadSize, 0);
+    head = *(new Sprite(HeadImage,
+        vector(), vector(0, stg.neckY),
+        stg.HeadSize));
 
-    Sprite* eye1 = new Sprite(EyeImage,
-        vector(0,0),
-        vector(0,0), stg.EyeSize, 0);
+    eye1 = *(new Sprite(EyeImage,
+        vector(), vector(),
+        stg.EyeSize));
 
-    Sprite* eye2 = new Sprite(EyeImage,
-        vector(0,0),
-        vector(0,0),  stg.EyeSize, 0, true);
-    
+    eye2 = *(new Sprite(EyeImage,
+        vector(), vector(),
+        stg.EyeSize, true));
+#pragma endregion
 
-    while (CheckHitKey(KEY_INPUT_R));
+    while (CheckHitKey(KEY_INPUT_R)); //リセットループ防止
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_END) == 0) {
         if (CheckHitKey(KEY_INPUT_R)) {
             DeleteGraph(BodyImage);
@@ -58,43 +60,41 @@ vtubeloop:;
 
 
         tDeg = sin(so) * stg.BodyFurehaba;
-        head->Deg = sin(so -1) * stg.HeadFurehaba;
+        head.Deg = sin(so -1) * stg.HeadFurehaba;
         if (stg.GetdownMode) {
-            head->Deg = rand() % 360;
+            head.Deg = rand() % 360;
             tDeg = rand() % 360;
-            body->Pos.x = rand() % WIDTH;
-            body->Pos.y = rand() % HEIGHT;
+            body.Pos.x = rand() % WIDTH;
+            body.Pos.y = rand() % HEIGHT;
         }
-        body->Deg = tDeg;
-        Mouse = vector((double)(MouseX - stg.PointerHoseX) / stg.HeadPointerSize,
-            (double)(MouseY - stg.PointerHoseY) / stg.HeadPointerSize);
-        
-        head->Pos = vector(
-            sin(tDeg * A_DEG),
-            -cos(tDeg * A_DEG)) * 
-            (double)nl + vector(WIDTH / 2,HEIGHT) + Mouse;
+        body.Deg = tDeg;
+        Mouse = vector(MouseX - stg.PointerHoseX, 
+                    MouseY - stg.PointerHoseY)
+                    / stg.HeadPointerSize;
 
-        Mouse = vector((double)(MouseX - stg.PointerHoseX) / stg.EyePointerSize,
-                       (double)(MouseY - stg.PointerHoseY) / stg.EyePointerSize);
+        head.Pos = TurnV(
+                vector(WIDTH / 2, HEIGHT) + Mouse,
+                vector(0, nl), tDeg);
 
-        eye1->Pos = vector(
-            sin((head->Deg + stg.EyeKankaku) * A_DEG),
-            -cos((head->Deg + stg.EyeKankaku) * A_DEG)) *
-            (HEIGHT - stg.EyePos) + head->Pos + Mouse;
+        eye1.Deg = head.Deg + stg.EyeKankaku;
+        eye1.Pos = TurnV(
+            vector(head.Pos + Mouse),
+            vector(0, ep),
+            head.Deg + stg.EyeKankaku);
 
-        eye2->Pos = vector(
-            sin((head->Deg - stg.EyeKankaku) * A_DEG),
-            -cos((head->Deg - stg.EyeKankaku) * A_DEG)) *
-            (HEIGHT - stg.EyePos) + head->Pos + Mouse;
-
-        eye1->Deg = head->Deg + stg.EyeKankaku;
-        eye2->Deg = head->Deg - stg.EyeKankaku;
+        eye2.Deg = head.Deg - stg.EyeKankaku;
+        eye2.Pos = TurnV(
+            vector(head.Pos + Mouse),
+            vector(0, ep),
+            head.Deg - stg.EyeKankaku);
 
 
-        head->Draw();
-        body->Draw();
-        eye1->Draw();
-        eye2->Draw();
+
+
+        head.Draw();
+        body.Draw();
+        eye1.Draw();
+        eye2.Draw();
         ScreenFlip();
     }
 

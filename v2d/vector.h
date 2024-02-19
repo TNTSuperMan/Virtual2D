@@ -1,6 +1,6 @@
 #pragma once
 
-struct vector {
+struct vector { //座標コントロール
 	double x = 0;
 	double y = 0;
 	vector operator +(vector v);
@@ -10,3 +10,4 @@ struct vector {
 	vector(double ax, double ay);
 	vector();
 };
+vector TurnV(vector Cent, vector Str, double Deg); //回転した座標
