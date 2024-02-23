@@ -1,5 +1,7 @@
 #pragma once
-#include "include.h"
+#include <Windows.h>
+#include <DxLib.h>
+#include "define.h"
 
 class Initializer
 {

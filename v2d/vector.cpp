@@ -1,37 +1,37 @@
 #include "vector.h"
-#include "define.h"
 
-vector::vector() {}
 
-vector::vector(double ax, double ay) {
+vct2d::vct2d() {}
+
+vct2d::vct2d(double ax, double ay) {
 	x = ax;
 	y = ay;
 }
 
-vector vector::operator+(vector v) {
-	return vector(x + v.x, y + v.y);
+vct2d vct2d::operator+(vct2d v) {
+	return vct2d(x + v.x, y + v.y);
 }
 
-vector vector::operator-(vector v) {
-	return vector(x - v.x, y - v.y);
+vct2d vct2d::operator-(vct2d v) {
+	return vct2d(x - v.x, y - v.y);
 }
 
-vector vector::operator*(double v) {
-	return vector(x * v, y * v);
+vct2d vct2d::operator*(double v) {
+	return vct2d(x * v, y * v);
 }
 
 
-vector vector::operator/(double v) {
-	return vector(x / v, y / v);
+vct2d vct2d::operator/(double v) {
+	return vct2d(x / v, y / v);
 }
 
-vector TurnV(vector Cent, vector Str, double Deg) {
-	vector t = vector();
-	vector tf = vector(
+vct2d TurnV(vct2d Cent, vct2d Str, double Deg) {
+	vct2d t = vct2d();
+	vct2d tf = vct2d(
 		sin(Deg * A_DEG),
 		-cos(Deg * A_DEG));
 	t = t + tf * Str.y;
-	tf = vector(
+	tf = vct2d(
 		sin((Deg + 90) * A_DEG),
 		-cos((Deg + 90) * A_DEG));
 	t = t + tf * Str.x;

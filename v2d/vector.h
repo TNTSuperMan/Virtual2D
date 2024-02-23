@@ -1,13 +1,15 @@
 #pragma once
+#include <cmath>
+#include "define.h"
 
-struct vector { //座標コントロール
+struct vct2d { //座標コントロール
 	double x = 0;
 	double y = 0;
-	vector operator +(vector v);
-	vector operator -(vector v);
-	vector operator *(double v);
-	vector operator /(double v);
-	vector(double ax, double ay);
-	vector();
+	vct2d operator +(vct2d v);
+	vct2d operator -(vct2d v);
+	vct2d operator *(double v);
+	vct2d operator /(double v);
+	vct2d(double ax, double ay);
+	vct2d();
 };
-vector TurnV(vector Cent, vector Str, double Deg); //回転した座標
+vct2d TurnV(vct2d Cent, vct2d Str, double Deg); //回転した座標

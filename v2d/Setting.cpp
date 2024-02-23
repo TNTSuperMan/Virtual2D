@@ -1,17 +1,16 @@
 #include "Setting.h"
 #include "Dialog.h"
-#include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
 Setting::Setting() {
-	ifstream cfg(".\\model\\model.json");
+	std::ifstream cfg(".\\model\\model.json");
 	if (!cfg || cfg.fail()) {
 		Dialog("設定ファイル\".\\model\\model.json\"にアクセスできません。");
 		return;
 	}
 	char c;
 	json j;
-	string fd;
+	std::string fd;
 	while ((c = cfg.get()) != -1) {
 		fd += c;
 	}
@@ -40,4 +39,5 @@ Setting::Setting() {
 	catch (...) {
 		Dialog("ちゃんとa.txtかきやがれ");
 	}
+
 }
