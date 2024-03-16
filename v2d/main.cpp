@@ -81,6 +81,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
     #pragma endregion
 
+    /*
     #pragma region 発声ウインドウの初期化
 
     ended = false;
@@ -102,7 +103,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     UpdateWindow(wind);
 
     #pragma endregion
-
+    */
     vtubeloop:;
 
     #pragma region 初期化
@@ -187,6 +188,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         ScreenFlip();
         #pragma endregion
 
+        /*
         #pragma region 発声ウインドウ
 
         if (t->joinable() && !ended) t = new thread([] {
@@ -200,14 +202,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             DispatchMessageA(&msg);
             });
         #pragma endregion
-
+        */
     }
 
     DeleteGraph(BodyImage);
     DeleteGraph(HeadImage);
     DeleteGraph(EyeImage);
     DeleteGraph(MouthImage);
-    DestroyWindow(wind);
+    //DestroyWindow(wind);
     DxLib_End();
     return 0;
 }
