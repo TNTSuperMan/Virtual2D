@@ -1,7 +1,36 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "getvoice.h"
+
+using namespace std;
+
+size_t callbackWrite(void* contents, size_t size, size_t nmemb, void* userp)
+{
+	//((std::string*)userp)->append((char*)contents, size * nmemb);
+	return size * nmemb;
+}
+
+string fetch(const char* url) {
+	CURL* curl = curl_easy_init();
+	CURLcode ret;
+	string chunk;
+	if (curl == NULL) {
+		return NULL;
+	}
+
+	curl_easy_setopt(curl, CURLOPT_URL, url);
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callbackWrite);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &chunk);
+	ret = curl_easy_perform(curl);
+	curl_easy_cleanup(curl);
+
+	if (ret != CURLE_OK) {
+		return "NULL";
+	}
+	return chunk;
+}
+
 void Say(const char* rs){
 	#pragma region ローマ字変換
-
 	string h;
 	int  orl = 0;
 	while (orl < strlen(rs)) {
@@ -29,6 +58,8 @@ void Say(const char* rs){
 				break;
 			case ',':
 				h.append("、");
+				break;
+			case '/':
 				break;
 			case 'k':
 			case 'c':
@@ -336,13 +367,74 @@ void Say(const char* rs){
 					break;
 				}
 				break;
+			case 'j':
+				j:;
+				orl++;
+				switch (tolower(rs[orl])) {
+				case 'j':
+					h.append("っ");
+					goto j;
+					break;
+				case 'a':
+					h.append("じゃ");
+					break;
+				case 'i':
+					h.append("じ");
+					break;
+				case 'u':
+					h.append("じゅ");
+					break;
+				case 'e':
+					h.append("じぇ");
+					break;
+				case 'o':
+					h.append("じょ");
+					break;
+				}
+				break;
+			case 'f':
+			f:;
+				orl++;
+				switch (tolower(rs[orl])) {
+				case 'f':
+					h.append("っ");
+					goto f;
+					break;
+				case 'a':
+					h.append("ふぁ");
+					break;
+				case 'i':
+					h.append("ふぃ");
+					break;
+				case 'u':
+					h.append("ふ");
+					break;
+				case 'e':
+					h.append("ふぇ");
+					break;
+				case 'o':
+					h.append("ふぉ");
+					break;
+				}
+				break;
 			default:
 				h.append(" ");
 				break;
 		}
 		orl++;
 	}
-	printfDx(h.data());
-	printfDx("\n\n");
 	#pragma endregion
+
+	const char* say = h.c_str();
+
+	#pragma region 音声をリクエスト
+	//auto voice = thread([say] {
+		curl_global_init(CURL_GLOBAL_ALL);
+
+		printfDx("あ\n");
+		#pragma region /audio_query
+		#pragma endregion
+	//});
+	#pragma endregion
+
 }
