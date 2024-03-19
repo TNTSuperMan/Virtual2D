@@ -3,31 +3,6 @@
 
 using namespace std;
 
-size_t callbackWrite(void* contents, size_t size, size_t nmemb, void* userp)
-{
-	//((std::string*)userp)->append((char*)contents, size * nmemb);
-	return size * nmemb;
-}
-
-string fetch(const char* url) {
-	CURL* curl = curl_easy_init();
-	CURLcode ret;
-	string chunk;
-	if (curl == NULL) {
-		return NULL;
-	}
-
-	curl_easy_setopt(curl, CURLOPT_URL, url);
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callbackWrite);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &chunk);
-	ret = curl_easy_perform(curl);
-	curl_easy_cleanup(curl);
-
-	if (ret != CURLE_OK) {
-		return "NULL";
-	}
-	return chunk;
-}
 
 void Say(const char* rs){
 	#pragma region ローマ字変換
@@ -429,7 +404,6 @@ void Say(const char* rs){
 
 	#pragma region 音声をリクエスト
 	//auto voice = thread([say] {
-		curl_global_init(CURL_GLOBAL_ALL);
 
 		printfDx("あ\n");
 		#pragma region /audio_query

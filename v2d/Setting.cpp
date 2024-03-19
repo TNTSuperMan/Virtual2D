@@ -37,7 +37,7 @@ Setting::Setting() {
 		PointerHoseY = j["PointerHoseY"].get<int>();
 	}
 	catch (...) {
-		Dialog("ちゃんとa.txtかきやがれ");
+		Dialog(".\\model\\mode.jsonの記述が不正です。");
 	}
 
 }
