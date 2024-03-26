@@ -73,7 +73,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     int BodyImage, HeadImage, EyeImage, MouthImage,
         resflag, nl, MouseX, MouseY, ep;
     Sprite body, head, eye1, eye2;
-    double so, tDeg;
+    double so, tDeg, md;
+    ULONG64 tick;
     vct2d Mouse;
     HWND wind;
     Setting stg;
@@ -115,6 +116,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     ep = HEIGHT - stg.EyePos;
     MouseX = 0;
     MouseY = 0;
+    tick = 0;
     resflag = 0;
 
     body = *(new Sprite(BodyImage,
@@ -137,7 +139,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
     while (CheckHitKey(KEY_INPUT_F5)); //リセットループ防止
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_END) == 0) {
-
+        tick++;
         #pragma region DxLib描画系
         if (CheckHitKey(KEY_INPUT_F5)) {
             DeleteGraph(BodyImage);
@@ -180,6 +182,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             vct2d(head.Pos + Mouse),
             vct2d(0, ep),
             head.Deg - stg.EyeKankaku);
+
+        //瞬き
+        md = tick % stg.MabatakiKankaku;
+        if (md < stg.MabatakiTime) {
+            if (md < stg.MabatakiTime / 2) {
+                md = (double)(1 - (double)stg.MabatakiSize / 100) / (stg.MabatakiTime / 2) * (stg.MabatakiTime / 2 - md) + (double)stg.MabatakiSize / 100;
+                eye1.Stren = vct2d(1, md);
+                eye2.Stren = vct2d(1, md);
+            }
+            else {
+
+                md = (double)(1 - (double)stg.MabatakiSize / 100) / (stg.MabatakiTime / 2) * (md - stg.MabatakiTime / 2) + (double)stg.MabatakiSize / 100;
+                eye1.Stren = vct2d(1, md);
+                eye2.Stren = vct2d(1, md);
+            }
+        }
+        else {
+
+            eye1.Stren = vct2d(1, 1);
+            eye2.Stren = vct2d(1, 1);
+        }
 
         head.Draw();
         body.Draw();

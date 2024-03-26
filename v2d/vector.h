@@ -13,3 +13,4 @@ struct vct2d { //座標コントロール
 	vct2d();
 };
 vct2d TurnV(vct2d Cent, vct2d Str, double Deg); //回転した座標
+vct2d turn(double deg);

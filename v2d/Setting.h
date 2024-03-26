@@ -14,6 +14,9 @@ public:
 	int EyePos;         //–Ú‚ÌˆÊ’u
 	int EyeSize;        //–Ú‚Ì‘å‚«‚³
 	int EyeKankaku;     //–Ú‚ÌŠÔŠu
+	int MabatakiKankaku;//u‚«‚ÌŠÔŠu
+	int MabatakiTime;   //u‚«‚ÌŠÔ
+	int MabatakiSize;   //u‚«‚Ì‘å‚«‚³
 	int BodyFurehaba;   //‘Ì‚ÌU‚ê•
 	int HeadFurehaba;   //“ª‚ÌU‚ê•
 	int FureSpeed;      //U‚ê•ƒXƒs[ƒh €1000‚ÅÀÛ‚Ì’l

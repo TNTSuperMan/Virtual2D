@@ -9,11 +9,14 @@
 class Sprite
 {
 private:
-	bool ishanten;
+	int sizex;
+	int sizey;
 public:
+	bool ishanten;
 	int Image; //画像　これDxLibのハンドル
 	vct2d Pos; //座標
 	vct2d Cent; //中心座標
+	vct2d Stren; //伸び
 	double Size; //大きさ　100が基準
 	double Deg; //回転　360度で一回転だﾖ
 	virtual void Draw();

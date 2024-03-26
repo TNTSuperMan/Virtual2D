@@ -1,6 +1,4 @@
 #include "vector.h"
-
-
 vct2d::vct2d() {}
 
 vct2d::vct2d(double ax, double ay) {
@@ -25,15 +23,19 @@ vct2d vct2d::operator/(double v) {
 	return vct2d(x / v, y / v);
 }
 
+
+vct2d turn(double deg) {
+	return vct2d(
+		sin(deg * A_DEG),-cos(deg * A_DEG)
+	);
+}
+
+
 vct2d TurnV(vct2d Cent, vct2d Str, double Deg) {
 	vct2d t = vct2d();
-	vct2d tf = vct2d(
-		sin(Deg * A_DEG),
-		-cos(Deg * A_DEG));
+	vct2d tf = turn(Deg);
 	t = t + tf * Str.y;
-	tf = vct2d(
-		sin((Deg + 90) * A_DEG),
-		-cos((Deg + 90) * A_DEG));
+	tf = turn(Deg + 90);
 	t = t + tf * Str.x;
 	return t + Cent;
 }
