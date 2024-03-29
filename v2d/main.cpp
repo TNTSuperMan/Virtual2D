@@ -1,61 +1,38 @@
 ﻿#include <Windows.h>
+#include <windowsx.h>
 #include <future>
 #include <DxLib.h>
 #include "Initializer.h"
 #include "Sprite.h"
 #include "Setting.h"
 #include "define.h"
-#include "getvoice.h"
 #include "vector.h"
 using namespace std;
-MSG msg;
-bool ended;
-BOOL value;
-
-
-BOOL RegisterApp(const char* windowID, WNDPROC windowProc) {
-    WNDCLASSEXA wc;
-    wc.cbSize = sizeof(WNDCLASSEXA);
-    wc.style = CS_HREDRAW | CS_VREDRAW;
-    wc.lpfnWndProc = windowProc;
-    wc.cbClsExtra = 0;
-    wc.cbWndExtra = 0;
-    wc.hInstance = GetModuleHandleA(NULL);
-    wc.hIcon = (HICON)LoadIconA(NULL, IDI_APPLICATION);
-    wc.hCursor = (HCURSOR)LoadCursorA(NULL, IDC_ARROW);
-    wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-    wc.lpszMenuName = NULL;
-    wc.lpszClassName = windowID;
-    wc.hIconSm = (HICON)LoadImageA(NULL, IDI_APPLICATION, IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_SHARED);
-    return (RegisterClassExA(&wc));
-}
+string vpath;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
     static HWND inp, btn;
     switch (msg) {
         case WM_DESTROY:
             PostQuitMessage(0);
-            return 0;
-        case WM_CREATE:
-            inp = CreateWindow(
-                "EDIT", "ohayou gozaimasu.",
-                WS_CHILD | WS_BORDER | WS_VISIBLE | ES_LEFT,
-                0, 0, 325, 30, hWnd, (HMENU)1, ((LPCREATESTRUCT)(lp))->hInstance, NULL
-            );
-            btn = CreateWindow(
-                "BUTTON", "発声",
-                WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-                325, 0, 60, 30, hWnd, (HMENU)2, ((LPCREATESTRUCT)(lp))->hInstance, NULL
-            );
-            return 0;
-        case WM_COMMAND:
-            if (LOWORD(wp) == 2) {
-                SetWindowText(btn, "生成中");
-                char* inpt = new char[255];
-                GetWindowText(inp, inpt, 255);
-                Say(inpt);
-                return 0;
+            return 0; break;
+        case 0x0FAC:
+            return 1248; break;
+        case 0x0FAD:
+            switch (wp) {
+            case 1:
+                vpath.clear();
+                break;
+            case 2:
+                vpath.append((char*)&lp);
+                break;
+            case 3:
+                //MessageBox(GetMainWindowHandle(), vpath.c_str(), APP_NAME, MB_OK);
+                PlaySoundFile(vpath.c_str(), DX_PLAYTYPE_BACK);
+                break;
             }
+            return 8421; break;
+
     }
     return DefWindowProc(hWnd, msg, wp, lp);
 }
@@ -67,6 +44,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         MessageBoxA(NULL, "DxLibの初期化に失敗しました。\nDirectX9以降をインストールしてください。",APP_NAME, MB_OK);
         return -1;
     }
+    SetWindowLongPtr(GetMainWindowHandle(), GWLP_WNDPROC, (LONG_PTR)WndProc);
 
     #pragma region 変数宣言
 
@@ -76,35 +54,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     double so, tDeg, md;
     ULONG64 tick;
     vct2d Mouse;
-    HWND wind;
     Setting stg;
-    thread* t = new thread([] {return; });
 
     #pragma endregion
 
-    /*
-    #pragma region 発声ウインドウの初期化
-
-    ended = false;
-
-    if (!RegisterApp(VOICEWIND_ID, WndProc)) return -1;
-
-    wind = CreateWindow(
-        VOICEWIND_ID, "発声ウインドウ",
-        (WS_OVERLAPPED |
-            WS_CAPTION |
-            WS_SYSMENU |
-            WS_THICKFRAME |
-            WS_MINIMIZEBOX),
-        0, 0, 400, 67, GetMainWindowHandle(),
-        NULL, hInstance, NULL
-    );
-
-    ShowWindow(wind,SW_SHOW);
-    UpdateWindow(wind);
-
-    #pragma endregion
-    */
+    
     vtubeloop:;
 
     #pragma region 初期化
@@ -210,29 +164,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         eye2.Draw();
         ScreenFlip();
         #pragma endregion
-
-        /*
-        #pragma region 発声ウインドウ
-
-        if (t->joinable() && !ended) t = new thread([] {
-            value = GetMessageA(&msg, NULL, 0, 0);
-            if (value == 0 || value == -1) {
-                ended = true;
-                return;
-            }
-
-            TranslateMessage(&msg);
-            DispatchMessageA(&msg);
-            });
-        #pragma endregion
-        */
+        
     }
 
     DeleteGraph(BodyImage);
     DeleteGraph(HeadImage);
     DeleteGraph(EyeImage);
     DeleteGraph(MouthImage);
-    //DestroyWindow(wind);
     DxLib_End();
     return 0;
 }

@@ -14,7 +14,7 @@ void Initializer::DxLib() {
     SetAlwaysRunFlag(1);
     SetWindowText(APP_NAME);
     SetDoubleStartValidFlag(1);
-    SetMainWindowClassName("Virtual2D_Vtuber_Application");
+    SetMainWindowClassName(APP_CLASS);
     SetMouseDispFlag(1);
     SetDrawScreen(DX_SCREEN_BACK);
 }
