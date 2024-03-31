@@ -157,6 +157,7 @@
     <ClCompile Include="DIalog.cpp" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="Setting.cpp" />
+    <ClCompile Include="speaker.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="vector.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Initializer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Setting.h" />
+    <ClInclude Include="speaker.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="vector.h" />
   </ItemGroup>

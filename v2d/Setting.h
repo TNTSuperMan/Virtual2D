@@ -20,7 +20,7 @@ public:
 	int BodyFurehaba;   //体の振れ幅
 	int HeadFurehaba;   //頭の振れ幅
 	int FureSpeed;      //振れ幅スピード ÷1000で実際の値
-	int GetdownMode;    //ゲッダン☆モード
+	bool GetdownMode;    //ゲッダン☆モード
 	int EyePointerSize; //目がどのくらいポインタに影響されるか
 	int HeadPointerSize;//体がどのくらいポインタに影響されるか
 	int PointerHoseX;   //ポインター追跡の補整

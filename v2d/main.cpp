@@ -6,36 +6,10 @@
 #include "Sprite.h"
 #include "Setting.h"
 #include "define.h"
+#include "speaker.h"
 #include "vector.h"
 using namespace std;
-string vpath;
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
-    static HWND inp, btn;
-    switch (msg) {
-        case WM_DESTROY:
-            PostQuitMessage(0);
-            return 0; break;
-        case 0x0FAC:
-            return 1248; break;
-        case 0x0FAD:
-            switch (wp) {
-            case 1:
-                vpath.clear();
-                break;
-            case 2:
-                vpath.append((char*)&lp);
-                break;
-            case 3:
-                //MessageBox(GetMainWindowHandle(), vpath.c_str(), APP_NAME, MB_OK);
-                PlaySoundFile(vpath.c_str(), DX_PLAYTYPE_BACK);
-                break;
-            }
-            return 8421; break;
-
-    }
-    return DefWindowProc(hWnd, msg, wp, lp);
-}
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow) {
     
@@ -44,13 +18,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         MessageBoxA(NULL, "DxLibの初期化に失敗しました。\nDirectX9以降をインストールしてください。",APP_NAME, MB_OK);
         return -1;
     }
-    SetWindowLongPtr(GetMainWindowHandle(), GWLP_WNDPROC, (LONG_PTR)WndProc);
+    SetWindowLongPtr(GetMainWindowHandle(), GWLP_WNDPROC, (LONG_PTR)SpeakerAddProc);
 
     #pragma region 変数宣言
 
     int BodyImage, HeadImage, EyeImage, MouthImage,
-        resflag, nl, MouseX, MouseY, ep;
-    Sprite body, head, eye1, eye2;
+        resflag, nl, MouseX, MouseY, ep, now;
+    Sprite body, head, eye1, eye2, mouth;
     double so, tDeg, md;
     ULONG64 tick;
     vct2d Mouse;
@@ -65,6 +39,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     Initializer::Image(BodyImage, HeadImage, EyeImage, MouthImage);
     stg = *(new Setting());
     so = 0;
+    now = GetNowCount();
     tDeg = 0;
     nl = HEIGHT - stg.HeadY;
     ep = HEIGHT - stg.EyePos;
@@ -73,27 +48,36 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     tick = 0;
     resflag = 0;
 
-    body = *(new Sprite(BodyImage,
+    body = Sprite(BodyImage,
         vct2d(WIDTH / 2, stg.BodyY),
         vct2d(0, stg.BodyCentY),
-        stg.BodySize));
+        stg.BodySize);
 
-    head = *(new Sprite(HeadImage,
+    head = Sprite(HeadImage,
         vct2d(), vct2d(0, stg.neckY),
-        stg.HeadSize));
+        stg.HeadSize);
 
-    eye1 = *(new Sprite(EyeImage,
+    eye1 = Sprite(EyeImage,
         vct2d(), vct2d(),
-        stg.EyeSize));
+        stg.EyeSize);
 
-    eye2 = *(new Sprite(EyeImage,
+    eye2 = Sprite(EyeImage,
         vct2d(), vct2d(),
-        stg.EyeSize, true));
+        stg.EyeSize, true);
+
+    mouth = Sprite(MouthImage,
+        vct2d(), vct2d(),
+        7);
     #pragma endregion
 
     while (CheckHitKey(KEY_INPUT_F5)); //リセットループ防止
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_END) == 0) {
-        tick++;
+        while (now < GetNowCount() - 16) {
+            now += 16;
+            tick++;
+            mouth.Stren = vd.Loop();
+            so += (double)stg.FureSpeed / 1000;
+        }
         #pragma region DxLib描画系
         if (CheckHitKey(KEY_INPUT_F5)) {
             DeleteGraph(BodyImage);
@@ -105,7 +89,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         ClearDrawScreen();
         DrawBox(0, 0, WIDTH, HEIGHT, stg.backgroundColor, 1);
         GetMousePoint(&MouseX, &MouseY);
-        so += (double)stg.FureSpeed / 1000;
 
 
         tDeg = sin(so) * stg.BodyFurehaba;
@@ -143,25 +126,28 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             if (md < stg.MabatakiTime / 2) {
                 md = (double)(1 - (double)stg.MabatakiSize / 100) / (stg.MabatakiTime / 2) * (stg.MabatakiTime / 2 - md) + (double)stg.MabatakiSize / 100;
                 eye1.Stren = vct2d(1, md);
-                eye2.Stren = vct2d(1, md);
             }
             else {
 
                 md = (double)(1 - (double)stg.MabatakiSize / 100) / (stg.MabatakiTime / 2) * (md - stg.MabatakiTime / 2) + (double)stg.MabatakiSize / 100;
                 eye1.Stren = vct2d(1, md);
-                eye2.Stren = vct2d(1, md);
             }
         }
         else {
 
             eye1.Stren = vct2d(1, 1);
-            eye2.Stren = vct2d(1, 1);
         }
+        eye2.Stren = eye1.Stren;
+
+        mouth.Pos = TurnV(vct2d(head.Pos + Mouse * 0.8),
+            vct2d(0, 66), head.Deg);
+        mouth.Deg = head.Deg;
 
         head.Draw();
         body.Draw();
         eye1.Draw();
         eye2.Draw();
+        mouth.Draw();
         ScreenFlip();
         #pragma endregion
         

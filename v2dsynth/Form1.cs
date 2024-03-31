@@ -30,7 +30,6 @@ namespace v2dsynth
         }
         #region 変数
         bool isConnected = false;
-        bool isGenerating = false;
         IntPtr v2dhwnd = IntPtr.Zero;
         Properties.Settings cfg = new Properties.Settings();
         voicevox vc = new voicevox();
@@ -52,7 +51,7 @@ namespace v2dsynth
                     if("Virtual2D" == p.MainWindowTitle)
                     {
                         //Virtual2Dと接続を検証
-                        if(SendMessage(p.MainWindowHandle, 0x0FAC, IntPtr.Zero, IntPtr.Zero).ToInt64() == 1248)
+                        if(SendMessage(p.MainWindowHandle, 0xBACA, IntPtr.Zero, IntPtr.Zero).ToInt64() == 1248)
                         {
                             v2dhwnd = p.MainWindowHandle;
                         }
@@ -86,25 +85,28 @@ namespace v2dsynth
             }
             else
             {
-                if (isGenerating) return;
-                if(SendMessage(v2dhwnd,0xFAC,IntPtr.Zero, IntPtr.Zero).ToInt32() != 1248)
+                if (!button1.Enabled) return;
+                if (SendMessage(v2dhwnd, 0xBACA, IntPtr.Zero, IntPtr.Zero).ToInt64() != 1248)
                 {
                     Msg("Virtual2Dに接続できませんでした。");
                     isConnected = false;
+                    button1.Text = "接続";
                     v2dhwnd = IntPtr.Zero;
                     return;
                 }
-                isGenerating = true;
+                if (textBox1.Text.Length == 0) return;
+                button1.Enabled = false;
                 button1.Text = "生成中";
                 var vvquery = await vc.Request(Protcol.POST, "audio_query?text=" + Uri.EscapeUriString(textBox1.Text) + "&speaker=" + cfg.speaker.ToString(),null);
+                textBox1.Text = "";
                 if(vvquery == null)
                 {
                     Msg("声クエリの生成でエラーが発生しました。");
                     button1.Text = "発声";
-                    isGenerating = false;
+                    button1.Enabled = true;
                     return;
                 }
-
+                Clipboard.SetText(await vvquery.ReadAsStringAsync());
                 /*
                 AudioQuery q = JsonSerializer.Deserialize<AudioQuery>(JsonDocument.Parse(await vvquery.ReadAsStringAsync()),
                 new JsonSerializerOptions
@@ -118,7 +120,7 @@ namespace v2dsynth
                 {
                     Msg("声の生成でエラーが発生しました。");
                     button1.Text = "発声";
-                    isGenerating = false;
+                    button1.Enabled = true;
                     return;
                 }
                 byte[] vb = await voice.ReadAsByteArrayAsync();
@@ -130,22 +132,22 @@ namespace v2dsynth
                 }
                 fs.Close();
 
-                SendMessage(v2dhwnd, 0x0FAD, (IntPtr)1, IntPtr.Zero); //ファイル名の初期化
+                SendMessage(v2dhwnd, 0xBACA, (IntPtr)1, IntPtr.Zero); //ファイル名の初期化
                 foreach(char spc in synthpath)
                 {
-                    SendMessage(v2dhwnd, 0x0FAD, (IntPtr)2, (IntPtr)spc);
+                    SendMessage(v2dhwnd, 0xBACA, (IntPtr)2, (IntPtr)spc);
                 }
-                SendMessage(v2dhwnd, 0x0FAD, (IntPtr)3, IntPtr.Zero);
 
+
+                SendMessage(v2dhwnd, 0xBACA, (IntPtr)3, IntPtr.Zero);
                 button1.Text = "発声";
-                isGenerating = false;
+                button1.Enabled = true;
             }
         }
-    }
-    struct COPYDATASTRUCT
-    {
-        public int dwData;
-        public int cbData;
-        public string lpData;
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter) button1_Click(null, null);
+        }
     }
 }
