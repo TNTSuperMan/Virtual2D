@@ -4,7 +4,9 @@ using json = nlohmann::json;
 #define sett(name, type ) name = j[#name].get<type>();
 #define set(name) name = j[#name].get<int>();
 
-Setting::Setting() {
+Setting::Setting() {}
+
+Setting::Setting(int a) {
 	std::ifstream cfg(".\\model\\model.json");
 	if (!cfg || cfg.fail()) {
 		Dialog("設定ファイル\".\\model\\model.json\"にアクセスできません。");
@@ -40,6 +42,10 @@ Setting::Setting() {
 		set(HeadPointerSize);
 		set(PointerHoseX);
 		set(PointerHoseY);
+		set(MouthSize);
+		set(CloseMouthSize);
+		set(MouthY);
+		set(MouthPointerSize);
 	}
 	catch (...) {
 		Dialog(".\\model\\mode.jsonの記述が不正です。");

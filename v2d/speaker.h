@@ -4,20 +4,21 @@
 #include "DxLib.h"
 #include "vector.h"
 #include <iostream>
+#include <nlohmann/json.hpp>
 #include <vector>
 using namespace std;
 
 class VoiceData {
-private:
+public:
 	vector<int> waittime;
 	vector<char> saydata;
-	bool isstart;
+	bool isplay;
 	ULONG tick;
-public:
+	ULONG waitsum;
 	VoiceData();
 	void Add(int wait, char say);
 	void Start();
-	vct2d Loop();
+	vct2d Loop(bool& isclose);
 };
 
 extern string vpath;

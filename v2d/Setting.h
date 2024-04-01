@@ -25,5 +25,10 @@ public:
 	int HeadPointerSize;//体がどのくらいポインタに影響されるか
 	int PointerHoseX;   //ポインター追跡の補整
 	int PointerHoseY;   //ポインター追跡の補整
+	int MouthSize;      //口の大きさ
+	int CloseMouthSize; //閉じてる口の大きさ
+	int MouthY;         //口の位置
+	int MouthPointerSize;//口がどのくらいポインタに影響されるか
 	Setting();
+	Setting(int a);
 };

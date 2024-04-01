@@ -12,8 +12,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
 using System.Text.Json;
+//using Newtonsoft.Json;
+
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace v2dsynth
 {
@@ -44,6 +48,8 @@ namespace v2dsynth
         {
             if (!isConnected)
             {
+                button1.Text = "接続中";
+                button1.Enabled = false;
                 v2dhwnd = IntPtr.Zero;
                 //Virtual2Dウインドウを検索
                 foreach(Process p in Process.GetProcesses())
@@ -61,8 +67,8 @@ namespace v2dsynth
                 {
                     if(await vc.Request(Protcol.GET,"speakers",null) != null)
                     {
-                        Msg("接続に成功しました。");
                         button1.Text = "発声";
+                        textBox1.Enabled = true;
                         isConnected = true;
                     }
                     else
@@ -82,38 +88,38 @@ namespace v2dsynth
                 {
                     Msg("Virtual2Dに接続できませんでした。\nVirtual2Dが正しく起動しているかを確認してください。");
                 }
+                button1.Enabled = true;
             }
             else
             {
                 if (!button1.Enabled) return;
+                
                 if (SendMessage(v2dhwnd, 0xBACA, IntPtr.Zero, IntPtr.Zero).ToInt64() != 1248)
                 {
                     Msg("Virtual2Dに接続できませんでした。");
                     isConnected = false;
                     button1.Text = "接続";
+                    textBox1.Enabled = false;
                     v2dhwnd = IntPtr.Zero;
+                    textBox1.Text = "";
                     return;
                 }
                 if (textBox1.Text.Length == 0) return;
                 button1.Enabled = false;
+                textBox1.Enabled = false;
                 button1.Text = "生成中";
                 var vvquery = await vc.Request(Protcol.POST, "audio_query?text=" + Uri.EscapeUriString(textBox1.Text) + "&speaker=" + cfg.speaker.ToString(),null);
-                textBox1.Text = "";
                 if(vvquery == null)
                 {
                     Msg("声クエリの生成でエラーが発生しました。");
                     button1.Text = "発声";
+                    textBox1.Enabled = true;
                     button1.Enabled = true;
                     return;
                 }
-                Clipboard.SetText(await vvquery.ReadAsStringAsync());
-                /*
-                AudioQuery q = JsonSerializer.Deserialize<AudioQuery>(JsonDocument.Parse(await vvquery.ReadAsStringAsync()),
-                new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
-                }); */
+                byte[] querytext = await vvquery.ReadAsByteArrayAsync();
+
+
 
                 var voice = await vc.Request(Protcol.POST, "synthesis?speaker=" + cfg.speaker.ToString(), vvquery);
                 if (voice == null)
@@ -121,6 +127,7 @@ namespace v2dsynth
                     Msg("声の生成でエラーが発生しました。");
                     button1.Text = "発声";
                     button1.Enabled = true;
+                    textBox1.Enabled = true;
                     return;
                 }
                 byte[] vb = await voice.ReadAsByteArrayAsync();
@@ -137,11 +144,17 @@ namespace v2dsynth
                 {
                     SendMessage(v2dhwnd, 0xBACA, (IntPtr)2, (IntPtr)spc);
                 }
+                foreach(byte aq in querytext)
+                {
+                    SendMessage(v2dhwnd, 0xBACA, (IntPtr)3, (IntPtr)aq);
+                }
 
 
-                SendMessage(v2dhwnd, 0xBACA, (IntPtr)3, IntPtr.Zero);
+                SendMessage(v2dhwnd, 0xBACA, (IntPtr)4, IntPtr.Zero);
                 button1.Text = "発声";
+                textBox1.Text = "";
                 button1.Enabled = true;
+                textBox1.Enabled = true;
             }
         }
 

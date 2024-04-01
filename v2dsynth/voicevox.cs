@@ -99,34 +99,61 @@ namespace v2dsynth
         public int outputSamplingRate { get; set; }
         public bool outputStereo { get; set; }
         public string kana { get; set; }
+        public AudioQuery() { }
+        [JsonConstructor]
+        public AudioQuery(Accent[] accent_phrases,int speedScale, int pitchScale,
+                            int intonationScale, int volumeScale, int prePhonemeLength,
+                            int postPhonemeLength, int outputSamplingRate, bool outputStereo, string kana)
+        {
+            this.accent_phrases = accent_phrases;
+            this.speedScale = speedScale;
+            this.pitchScale = pitchScale;
+            this.intonationScale = intonationScale;
+            this.volumeScale = volumeScale;
+            this.prePhonemeLength = prePhonemeLength;
+            this.postPhonemeLength = postPhonemeLength;
+            this.outputSamplingRate = outputSamplingRate;
+            this.outputStereo = outputStereo;
+            this.kana = kana;
+        }
     }
     [JsonSerializable(typeof(Accent))]
     class Accent
     {
         public Moras[] moras { get; set; }
         public int accent { get; set; }
-        public PauseMora pause_mora { get; set; }
+        public Moras pause_mora { get; set; }
         public bool is_interrogative { get; set; }
+        public Accent() { }
+        [JsonConstructor]
+        public Accent(Moras[] moras, int accent, Moras pause_mora, bool is_interrogative)
+        {
+            this.moras = moras;
+            this.accent = accent;
+            this.pause_mora = pause_mora;
+            this.is_interrogative = is_interrogative;
+        }
     }
     [JsonSerializable(typeof(Moras))]
     class Moras
     {
         public string text { get; set; }
         public string consonant { get; set; }
-        public int consonant_length { get; set; }
+        public double consonant_length { get; set; }
         public string vowel { get; set; }
-        public int vowel_length { get; set; }
-        public int pitch { get; set; }
-    }
-    [JsonSerializable(typeof(PauseMora))]
-    class PauseMora
-    {
-        public string text { get; set; }
-        public string consonant { get; set; }
-        public int consonant_length { get; set; }
-        public string vowel { get; set; }
-        public int vowel_length { get; set; }
-        public int pitch { get; set; }
+        public double vowel_length { get; set; }
+        public double pitch { get; set; }
+        public Moras() { }
+        [JsonConstructor]
+        public Moras(string text, string consonant, double consonant_length, string vowel, double vowel_length, double pitch)
+        {
+            this.text = text;
+            this.consonant = consonant;
+            this.consonant_length = consonant_length;
+            this.vowel = vowel;
+            this.vowel_length = vowel_length;
+            this.pitch = pitch;
+        }
     }
     #endregion
 }

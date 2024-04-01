@@ -22,10 +22,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
     #pragma region 変数宣言
 
-    int BodyImage, HeadImage, EyeImage, MouthImage,
+    int BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage,
         resflag, nl, MouseX, MouseY, ep, now;
     Sprite body, head, eye1, eye2, mouth;
     double so, tDeg, md;
+    bool isclose;
     ULONG64 tick;
     vct2d Mouse;
     Setting stg;
@@ -36,8 +37,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     vtubeloop:;
 
     #pragma region 初期化
-    Initializer::Image(BodyImage, HeadImage, EyeImage, MouthImage);
-    stg = *(new Setting());
+    clsDx();
+    Initializer::Image(BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage);
+    stg = *(new Setting(1));
     so = 0;
     now = GetNowCount();
     tDeg = 0;
@@ -75,7 +77,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         while (now < GetNowCount() - 16) {
             now += 16;
             tick++;
-            mouth.Stren = vd.Loop();
+            mouth.Stren = vd.Loop(isclose);
+            if (isclose) {
+                mouth.Stren = mouth.Stren * stg.CloseMouthSize / 100;
+            }
+            else {
+                mouth.Stren = mouth.Stren * stg.MouthSize / 100;
+            }
+            mouth.Image = isclose ? MouthCloseImage : MouthImage;
             so += (double)stg.FureSpeed / 1000;
         }
         #pragma region DxLib描画系
@@ -90,15 +99,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         DrawBox(0, 0, WIDTH, HEIGHT, stg.backgroundColor, 1);
         GetMousePoint(&MouseX, &MouseY);
 
+        if (stg.GetdownMode) {
+            body.Pos = vct2d(rand() % WIDTH, rand() % HEIGHT);
+            body.Deg = rand() % 360;
+            head.Pos = vct2d(rand() % WIDTH, rand() % HEIGHT);
+            head.Deg = rand() % 360;
+            eye1.Pos = vct2d(rand() % WIDTH, rand() % HEIGHT);
+            eye1.Deg = rand() % 360;
+            eye2.Pos = vct2d(rand() % WIDTH, rand() % HEIGHT);
+            eye2.Deg = rand() % 360;
+            mouth.Pos = vct2d(rand() % WIDTH, rand() % HEIGHT);
+            mouth.Deg = rand() % 360;
+            goto draw;
+        }
 
         tDeg = sin(so) * stg.BodyFurehaba;
         head.Deg = sin(so -1) * stg.HeadFurehaba;
-        if (stg.GetdownMode) {
-            head.Deg = rand() % 360;
-            tDeg = rand() % 360;
-            body.Pos.x = rand() % WIDTH;
-            body.Pos.y = rand() % HEIGHT;
-        }
         body.Deg = tDeg;
         Mouse = vct2d(MouseX - stg.PointerHoseX, 
                     MouseY - stg.PointerHoseY)
@@ -139,10 +155,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         }
         eye2.Stren = eye1.Stren;
 
-        mouth.Pos = TurnV(vct2d(head.Pos + Mouse * 0.8),
-            vct2d(0, 66), head.Deg);
+        mouth.Pos = TurnV(vct2d(head.Pos + Mouse * stg.MouthPointerSize / 100),
+            vct2d(0, stg.MouthY), head.Deg);
         mouth.Deg = head.Deg;
 
+        draw:
         head.Draw();
         body.Draw();
         eye1.Draw();
