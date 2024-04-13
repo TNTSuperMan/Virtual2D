@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net;
-using System.IO;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using System.Windows.Forms;
 
 namespace v2dsynth
 {

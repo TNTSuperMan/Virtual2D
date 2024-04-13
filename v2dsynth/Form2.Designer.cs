@@ -41,7 +41,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(136, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(482, 19);
+            this.textBox1.Size = new System.Drawing.Size(245, 19);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -56,7 +56,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(624, 12);
+            this.button1.Location = new System.Drawing.Point(387, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(38, 19);
             this.button1.TabIndex = 2;
@@ -83,7 +83,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(387, 44);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(43, 19);
+            this.button2.Size = new System.Drawing.Size(38, 19);
             this.button2.TabIndex = 5;
             this.button2.Text = "更新";
             this.button2.UseVisualStyleBackColor = true;
@@ -104,13 +104,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 450);
+            this.ClientSize = new System.Drawing.Size(433, 235);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
+            this.MaximumSize = new System.Drawing.Size(449, 274);
+            this.MinimumSize = new System.Drawing.Size(449, 274);
             this.Name = "Form2";
             this.Text = "設定";
             this.ResumeLayout(false);

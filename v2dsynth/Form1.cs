@@ -1,23 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.IO;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net.Http;
-using System.Text.Json;
-//using Newtonsoft.Json;
-
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json.Linq;
 
 namespace v2dsynth
 {
@@ -31,6 +16,7 @@ namespace v2dsynth
         public Form1()
         {
             InitializeComponent();
+            SetWindow(WindowMode.NonConnected);
         }
         #region 変数
         bool isConnected = false;
@@ -48,8 +34,7 @@ namespace v2dsynth
         {
             if (!isConnected)
             {
-                button1.Text = "接続中";
-                button1.Enabled = false;
+                SetWindow(WindowMode.Connecting);
                 v2dhwnd = IntPtr.Zero;
                 //Virtual2Dウインドウを検索
                 foreach(Process p in Process.GetProcesses())
@@ -67,9 +52,8 @@ namespace v2dsynth
                 {
                     if(await vc.Request(Protcol.GET,"speakers",null) != null)
                     {
-                        button1.Text = "発声";
-                        textBox1.Enabled = true;
-                        isConnected = true;
+                        SetWindow(WindowMode.Connected);
+                        return;
                     }
                     else
                     {
@@ -88,12 +72,10 @@ namespace v2dsynth
                 {
                     Msg("Virtual2Dに接続できませんでした。\nVirtual2Dが正しく起動しているかを確認してください。");
                 }
-                button1.Enabled = true;
+                SetWindow(WindowMode.NonConnected);
             }
             else
             {
-                if (!button1.Enabled) return;
-                
                 if (SendMessage(v2dhwnd, 0xBACA, IntPtr.Zero, IntPtr.Zero).ToInt64() != 1248)
                 {
                     Msg("Virtual2Dに接続できませんでした。");
@@ -105,16 +87,12 @@ namespace v2dsynth
                     return;
                 }
                 if (textBox1.Text.Length == 0) return;
-                button1.Enabled = false;
-                textBox1.Enabled = false;
-                button1.Text = "生成中";
+                SetWindow(WindowMode.Generating);
                 var vvquery = await vc.Request(Protcol.POST, "audio_query?text=" + Uri.EscapeUriString(textBox1.Text) + "&speaker=" + cfg.speaker.ToString(),null);
                 if(vvquery == null)
                 {
                     Msg("声クエリの生成でエラーが発生しました。");
-                    button1.Text = "発声";
-                    textBox1.Enabled = true;
-                    button1.Enabled = true;
+                    SetWindow(WindowMode.Connected);
                     return;
                 }
                 byte[] querytext = await vvquery.ReadAsByteArrayAsync();
@@ -125,9 +103,7 @@ namespace v2dsynth
                 if (voice == null)
                 {
                     Msg("声の生成でエラーが発生しました。");
-                    button1.Text = "発声";
-                    button1.Enabled = true;
-                    textBox1.Enabled = true;
+                    SetWindow(WindowMode.Connected);
                     return;
                 }
                 byte[] vb = await voice.ReadAsByteArrayAsync();
@@ -151,10 +127,7 @@ namespace v2dsynth
 
 
                 SendMessage(v2dhwnd, 0xBACA, (IntPtr)4, IntPtr.Zero);
-                button1.Text = "発声";
-                textBox1.Text = "";
-                button1.Enabled = true;
-                textBox1.Enabled = true;
+                SetWindow(WindowMode.Connected);
             }
         }
 
@@ -162,5 +135,45 @@ namespace v2dsynth
         {
             if(e.KeyCode == Keys.Enter) button1_Click(null, null);
         }
+        private void SetWindow(WindowMode wmode)
+        {
+            switch (wmode)
+            {
+                case WindowMode.NonConnected:
+                    isConnected = false;
+                    button1.Text = "接続";
+                    button1.Enabled = true;
+                    textBox1.Enabled = false;
+                    textBox1.Text = string.Empty;
+                    break;
+                case WindowMode.Connecting:
+                    button1.Text = "接続中";
+                    button1.Enabled = false;
+                    textBox1.Enabled = false;
+                    textBox1.Text = string.Empty;
+                    break;
+                case WindowMode.Connected:
+                    isConnected = true;
+                    button1.Text = "発声";
+                    button1.Enabled = true;
+                    textBox1.Enabled = true;
+                    textBox1.Text = string.Empty;
+                    break;
+                case WindowMode.Generating:
+                    isConnected = true;
+                    button1.Text = "生成中";
+                    button1.Enabled = false;
+                    textBox1.Enabled = false;
+                    break;
+
+            }
+        }
+    }
+    public enum WindowMode
+    {
+        NonConnected = 0,
+        Connecting = 1,
+        Connected = 2,
+        Generating = 3
     }
 }

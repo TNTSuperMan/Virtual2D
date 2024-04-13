@@ -29,26 +29,26 @@ LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
             break;
         case 4:
             json query = json::parse(audioquery);
-            string ret;
-            for each ( json ap in query["accent_phrases"])
-            {
-                for each (json mora in ap["moras"])
-                {
+            int i = 0;
+            while (query["accent_phrases"][i].is_structured()) {
+                int j = 0;
+                while (query["accent_phrases"][i]["moras"][j].is_structured()) {
+                    json mora = query["accent_phrases"][i]["moras"][j];
                     if (mora["consonant"].is_string()) {
-                        vd.Add(mora["consonant_length"].get<double>() * 60, 
+                        vd.Add(mora["consonant_length"].get<double>() * 60,
                             *(mora["consonant"].get<string>().c_str()));
                     }
                     vd.Add(mora["vowel_length"].get<double>() * 60,
                         *(mora["vowel"].get<string>().c_str()));
+                    j++;
                 }
+                i++;
             }
             vd.waitsum = 0;
-            for each (int var in vd.waittime)
-            {
-                vd.waitsum += var;
+            for (int i = 0; i < vd.waittime.size(); i++) {
+                vd.waitsum += vd.waittime[i];
             }
             PlaySoundFile(vpath.c_str(), DX_PLAYTYPE_BACK);
-            printfDx(ret.c_str());
             vd.Start();
             break;
         }
@@ -62,6 +62,7 @@ VoiceData::VoiceData() {
     saydata = vector<char>();
     isplay = false;
     tick = 0;
+    waitsum = 0;
 }
 
 void VoiceData::Add(int wait, char say) {

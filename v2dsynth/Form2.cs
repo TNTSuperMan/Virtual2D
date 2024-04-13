@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Windows.Forms;
 using System.Text.Unicode;
