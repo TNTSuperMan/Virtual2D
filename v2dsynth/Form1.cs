@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using v2dsynth.Properties;
 
 namespace v2dsynth
 {
@@ -88,6 +89,7 @@ namespace v2dsynth
                 }
                 if (textBox1.Text.Length == 0) return;
                 SetWindow(WindowMode.Generating);
+                
                 var vvquery = await vc.Request(Protcol.POST, "audio_query?text=" + Uri.EscapeUriString(textBox1.Text) + "&speaker=" + cfg.speaker.ToString(),null);
                 if(vvquery == null)
                 {
@@ -115,17 +117,24 @@ namespace v2dsynth
                 }
                 fs.Close();
 
+                string qtpath = Path.GetTempFileName();
+                File.WriteAllText(qtpath, System.Text.Encoding.UTF8.GetString(querytext));
+
                 SendMessage(v2dhwnd, 0xBACA, (IntPtr)1, IntPtr.Zero); //ファイル名の初期化
                 foreach(char spc in synthpath)
                 {
                     SendMessage(v2dhwnd, 0xBACA, (IntPtr)2, (IntPtr)spc);
                 }
-                foreach(byte aq in querytext)
+
+                foreach(byte aq in qtpath)
                 {
                     SendMessage(v2dhwnd, 0xBACA, (IntPtr)3, (IntPtr)aq);
                 }
 
 
+                SendMessage(v2dhwnd, 0xBACA, (IntPtr)4, IntPtr.Zero);
+                
+                
                 SendMessage(v2dhwnd, 0xBACA, (IntPtr)4, IntPtr.Zero);
                 SetWindow(WindowMode.Connected);
             }

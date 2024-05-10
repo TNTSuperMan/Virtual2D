@@ -14,20 +14,20 @@ LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
         return 0; break;
     case 0xBACA:
         switch (wp) {
-        case 0:
+        case 0: //Test
             return 1248; break;
-        case 1:
+        case 1: //Init
             vd = VoiceData();
             audioquery.clear();
             vpath.clear();
             break;
-        case 2:
+        case 2: //VoicePath
             vpath.append((char*)&lp);
             break;
-        case 3:
+        case 3: //QueryPath
             audioquery.append((char*)&lp);
             break;
-        case 4:
+        case 4: //Say
             json query = json::parse(audioquery);
             int i = 0;
             while (query["accent_phrases"][i].is_structured()) {
