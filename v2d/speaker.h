@@ -4,6 +4,7 @@
 #include "DxLib.h"
 #include "vector.h"
 #include <iostream>
+#include <fstream>
 #include <nlohmann/json.hpp>
 #include <vector>
 using namespace std;

@@ -80,11 +80,8 @@ namespace v2dsynth
                 if (SendMessage(v2dhwnd, 0xBACA, IntPtr.Zero, IntPtr.Zero).ToInt64() != 1248)
                 {
                     Msg("Virtual2Dに接続できませんでした。");
-                    isConnected = false;
-                    button1.Text = "接続";
-                    textBox1.Enabled = false;
+                    SetWindow(WindowMode.NonConnected);
                     v2dhwnd = IntPtr.Zero;
-                    textBox1.Text = "";
                     return;
                 }
                 if (textBox1.Text.Length == 0) return;
@@ -118,7 +115,7 @@ namespace v2dsynth
                 fs.Close();
 
                 string qtpath = Path.GetTempFileName();
-                File.WriteAllText(qtpath, System.Text.Encoding.UTF8.GetString(querytext));
+                File.WriteAllBytes(qtpath, querytext);
 
                 SendMessage(v2dhwnd, 0xBACA, (IntPtr)1, IntPtr.Zero); //ファイル名の初期化
                 foreach(char spc in synthpath)
@@ -130,19 +127,20 @@ namespace v2dsynth
                 {
                     SendMessage(v2dhwnd, 0xBACA, (IntPtr)3, (IntPtr)aq);
                 }
+                SendMessage(v2dhwnd, 0xBACA, (IntPtr)4, (IntPtr)querytext.Length);
 
 
-                SendMessage(v2dhwnd, 0xBACA, (IntPtr)4, IntPtr.Zero);
-                
-                
-                SendMessage(v2dhwnd, 0xBACA, (IntPtr)4, IntPtr.Zero);
+                SendMessage(v2dhwnd, 0xBACA, (IntPtr)5, IntPtr.Zero);
                 SetWindow(WindowMode.Connected);
             }
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter) button1_Click(null, null);
+            if(e.KeyCode == Keys.Enter)
+            {
+                button1_Click(null, null);
+            }
         }
         private void SetWindow(WindowMode wmode)
         {

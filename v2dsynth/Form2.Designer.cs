@@ -67,8 +67,9 @@
             // openFileDialog1
             // 
             this.openFileDialog1.DefaultExt = "exe";
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "VOICEVOXファイル|VOICEVOX.exe|VOICEVOX APIファイル(上級者向け)|run.exe|全てのファイル|*.*";
+            this.openFileDialog1.FileName = "C:\\Program Files\\VOICEVOX";
+            this.openFileDialog1.Filter = "VOICEVOX実行ファイル|VOICEVOX.exe;run.exe|VOICEVOX本体|VOICEVOX.exe|VOICEVOX APIファイル(上級者向" +
+    "け)|run.exe|全てのファイル|*.*";
             // 
             // label2
             // 

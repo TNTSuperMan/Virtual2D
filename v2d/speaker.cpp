@@ -3,7 +3,8 @@
 using json = nlohmann::json;
 
 string vpath;
-string audioquery;
+string querypath;
+int len;
 VoiceData vd;
 
 LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
@@ -18,17 +19,24 @@ LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
             return 1248; break;
         case 1: //Init
             vd = VoiceData();
-            audioquery.clear();
+            querypath.clear();
             vpath.clear();
             break;
         case 2: //VoicePath
             vpath.append((char*)&lp);
             break;
         case 3: //QueryPath
-            audioquery.append((char*)&lp);
+            querypath.append((char*)&lp);
             break;
-        case 4: //Say
-            json query = json::parse(audioquery);
+        case 4: //Length
+            len = lp + 2;
+            break;
+        case 5: //Say
+            ifstream f(querypath);
+            char* jsondata = new char[len];
+            f.getline(jsondata, len);
+            f.close();
+            json query = json::parse(jsondata);
             int i = 0;
             while (query["accent_phrases"][i].is_structured()) {
                 int j = 0;
