@@ -24,4 +24,5 @@ public:
 
 extern string vpath;
 extern VoiceData vd;
+extern bool isNeedReload;
 LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);

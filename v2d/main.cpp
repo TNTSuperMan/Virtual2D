@@ -23,11 +23,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     #pragma region 変数宣言
 
     int BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage,
-        resflag, nl, MouseX, MouseY, ep, now;
+         nl, MouseX, MouseY, ep, now;
     Sprite body, head, eye1, eye2, mouth;
-    double so, tDeg, md;
+    double so = 0, tDeg = 0, md;
     bool isclose;
-    ULONG64 tick;
+    ULONG64 tick = 0;
     vct2d Mouse;
     Setting stg;
 
@@ -40,15 +40,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     clsDx();
     Initializer::Image(BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage);
     stg = *(new Setting(1));
-    so = 0;
     now = GetNowCount();
-    tDeg = 0;
     nl = HEIGHT - stg.HeadY;
     ep = HEIGHT - stg.EyePos;
-    MouseX = 0;
-    MouseY = 0;
-    tick = 0;
-    resflag = 0;
 
     body = Sprite(BodyImage,
         vct2d(WIDTH / 2, stg.BodyY),
@@ -88,7 +82,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             so += (double)stg.FureSpeed / 1000;
         }
         #pragma region DxLib描画系
-        if (CheckHitKey(KEY_INPUT_F5)) {
+        if (CheckHitKey(KEY_INPUT_F5) || isNeedReload) {
             DeleteGraph(BodyImage);
             DeleteGraph(HeadImage);
             DeleteGraph(EyeImage);

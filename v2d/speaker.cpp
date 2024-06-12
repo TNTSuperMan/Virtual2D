@@ -6,6 +6,7 @@ string vpath;
 string querypath;
 int len;
 VoiceData vd;
+bool isNeedReload = false;
 
 LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
     static HWND inp, btn;
@@ -61,6 +62,9 @@ LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
             break;
         }
         return 0; break;
+    case 0xBAFA:
+        isNeedReload = true;
+        return 4545; break;
     }
     return DefWindowProc(hWnd, msg, wp, lp);
 }
@@ -77,7 +81,6 @@ void VoiceData::Add(int wait, char say) {
     waittime.push_back(wait);
     saydata.push_back(say);
 }
-
 vct2d VoiceData::Loop(bool& isclose) {
     if (isplay) {
         /* Œû‚ÌŒ`‚ðŒvŽZ */
@@ -120,7 +123,6 @@ vct2d VoiceData::Loop(bool& isclose) {
         tick++;
         isclose = false;
         return ret;
-        //return vct2d(1, (double)(rand() % 100) / 100);
     }
     else {
         tick = 0;

@@ -37,18 +37,18 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.bodyY = new System.Windows.Forms.NumericUpDown();
+            this.bodyCentY = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.bodySize = new System.Windows.Forms.NumericUpDown();
+            this.neckY = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
+            this.headY = new System.Windows.Forms.NumericUpDown();
+            this.headSize = new System.Windows.Forms.NumericUpDown();
+            this.eyePos = new System.Windows.Forms.NumericUpDown();
+            this.eyeSize = new System.Windows.Forms.NumericUpDown();
+            this.eyeKankaku = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -56,36 +56,58 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label12 = new System.Windows.Forms.Label();
-            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown14 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown15 = new System.Windows.Forms.NumericUpDown();
+            this.bodyFurehaba = new System.Windows.Forms.NumericUpDown();
+            this.headFurehaba = new System.Windows.Forms.NumericUpDown();
+            this.fureSpeed = new System.Windows.Forms.NumericUpDown();
+            this.headPointerSize = new System.Windows.Forms.NumericUpDown();
+            this.pointerHoseX = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.numericUpDown13 = new System.Windows.Forms.NumericUpDown();
+            this.eyePointerSize = new System.Windows.Forms.NumericUpDown();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.numericUpDown16 = new System.Windows.Forms.NumericUpDown();
+            this.pointerHoseY = new System.Windows.Forms.NumericUpDown();
+            this.label19 = new System.Windows.Forms.Label();
+            this.mabatakiKankaku = new System.Windows.Forms.NumericUpDown();
+            this.label20 = new System.Windows.Forms.Label();
+            this.mabatakiTime = new System.Windows.Forms.NumericUpDown();
+            this.label21 = new System.Windows.Forms.Label();
+            this.mabatakiSize = new System.Windows.Forms.NumericUpDown();
+            this.label22 = new System.Windows.Forms.Label();
+            this.mouthSize = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.closeMouthSize = new System.Windows.Forms.NumericUpDown();
+            this.label24 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label25 = new System.Windows.Forms.Label();
+            this.mouthPointerSize = new System.Windows.Forms.NumericUpDown();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.bodyY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bodyCentY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bodySize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.neckY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.headY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.headSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eyePos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eyeSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eyeKankaku)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bodyFurehaba)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.headFurehaba)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fureSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.headPointerSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pointerHoseX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eyePointerSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pointerHoseY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mabatakiKankaku)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mabatakiTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mabatakiSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mouthSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeMouthSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mouthPointerSize)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -159,41 +181,41 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "体の回転の中心";
             // 
-            // numericUpDown1
+            // bodyY
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(69, 57);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.bodyY.Location = new System.Drawing.Point(69, 57);
+            this.bodyY.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.bodyY.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(92, 19);
-            this.numericUpDown1.TabIndex = 10;
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.chg);
+            this.bodyY.Name = "bodyY";
+            this.bodyY.Size = new System.Drawing.Size(92, 19);
+            this.bodyY.TabIndex = 10;
+            this.bodyY.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown2
+            // bodyCentY
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(103, 82);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.bodyCentY.Location = new System.Drawing.Point(103, 82);
+            this.bodyCentY.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
+            this.bodyCentY.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(58, 19);
-            this.numericUpDown2.TabIndex = 11;
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.chg);
+            this.bodyCentY.Name = "bodyCentY";
+            this.bodyCentY.Size = new System.Drawing.Size(58, 19);
+            this.bodyCentY.TabIndex = 11;
+            this.bodyCentY.ValueChanged += new System.EventHandler(this.chg);
             // 
             // label5
             // 
@@ -204,41 +226,41 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "体の大きさ";
             // 
-            // numericUpDown3
+            // bodySize
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(74, 107);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
+            this.bodySize.Location = new System.Drawing.Point(74, 107);
+            this.bodySize.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown3.Minimum = new decimal(new int[] {
+            this.bodySize.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(87, 19);
-            this.numericUpDown3.TabIndex = 13;
-            this.numericUpDown3.ValueChanged += new System.EventHandler(this.chg);
+            this.bodySize.Name = "bodySize";
+            this.bodySize.Size = new System.Drawing.Size(87, 19);
+            this.bodySize.TabIndex = 13;
+            this.bodySize.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown4
+            // neckY
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(69, 132);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
+            this.neckY.Location = new System.Drawing.Point(69, 132);
+            this.neckY.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown4.Minimum = new decimal(new int[] {
+            this.neckY.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(92, 19);
-            this.numericUpDown4.TabIndex = 14;
-            this.numericUpDown4.ValueChanged += new System.EventHandler(this.chg);
+            this.neckY.Name = "neckY";
+            this.neckY.Size = new System.Drawing.Size(92, 19);
+            this.neckY.TabIndex = 14;
+            this.neckY.ValueChanged += new System.EventHandler(this.chg);
             // 
             // label6
             // 
@@ -258,95 +280,95 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "頭の位置";
             // 
-            // numericUpDown5
+            // headY
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(69, 157);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
+            this.headY.Location = new System.Drawing.Point(69, 157);
+            this.headY.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown5.Minimum = new decimal(new int[] {
+            this.headY.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(92, 19);
-            this.numericUpDown5.TabIndex = 17;
-            this.numericUpDown5.ValueChanged += new System.EventHandler(this.chg);
+            this.headY.Name = "headY";
+            this.headY.Size = new System.Drawing.Size(92, 19);
+            this.headY.TabIndex = 17;
+            this.headY.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown6
+            // headSize
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(74, 182);
-            this.numericUpDown6.Maximum = new decimal(new int[] {
+            this.headSize.Location = new System.Drawing.Point(74, 182);
+            this.headSize.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown6.Minimum = new decimal(new int[] {
+            this.headSize.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(87, 19);
-            this.numericUpDown6.TabIndex = 18;
-            this.numericUpDown6.ValueChanged += new System.EventHandler(this.chg);
+            this.headSize.Name = "headSize";
+            this.headSize.Size = new System.Drawing.Size(87, 19);
+            this.headSize.TabIndex = 18;
+            this.headSize.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown7
+            // eyePos
             // 
-            this.numericUpDown7.Location = new System.Drawing.Point(69, 207);
-            this.numericUpDown7.Maximum = new decimal(new int[] {
+            this.eyePos.Location = new System.Drawing.Point(69, 207);
+            this.eyePos.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown7.Minimum = new decimal(new int[] {
+            this.eyePos.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Size = new System.Drawing.Size(92, 19);
-            this.numericUpDown7.TabIndex = 19;
-            this.numericUpDown7.ValueChanged += new System.EventHandler(this.chg);
+            this.eyePos.Name = "eyePos";
+            this.eyePos.Size = new System.Drawing.Size(92, 19);
+            this.eyePos.TabIndex = 19;
+            this.eyePos.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown8
+            // eyeSize
             // 
-            this.numericUpDown8.Location = new System.Drawing.Point(74, 232);
-            this.numericUpDown8.Maximum = new decimal(new int[] {
+            this.eyeSize.Location = new System.Drawing.Point(74, 232);
+            this.eyeSize.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown8.Minimum = new decimal(new int[] {
+            this.eyeSize.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Size = new System.Drawing.Size(87, 19);
-            this.numericUpDown8.TabIndex = 20;
-            this.numericUpDown8.ValueChanged += new System.EventHandler(this.chg);
+            this.eyeSize.Name = "eyeSize";
+            this.eyeSize.Size = new System.Drawing.Size(87, 19);
+            this.eyeSize.TabIndex = 20;
+            this.eyeSize.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown9
+            // eyeKankaku
             // 
-            this.numericUpDown9.Location = new System.Drawing.Point(69, 257);
-            this.numericUpDown9.Maximum = new decimal(new int[] {
+            this.eyeKankaku.Location = new System.Drawing.Point(69, 257);
+            this.eyeKankaku.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown9.Minimum = new decimal(new int[] {
+            this.eyeKankaku.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown9.Name = "numericUpDown9";
-            this.numericUpDown9.Size = new System.Drawing.Size(92, 19);
-            this.numericUpDown9.TabIndex = 21;
-            this.numericUpDown9.ValueChanged += new System.EventHandler(this.chg);
+            this.eyeKankaku.Name = "eyeKankaku";
+            this.eyeKankaku.Size = new System.Drawing.Size(92, 19);
+            this.eyeKankaku.TabIndex = 21;
+            this.eyeKankaku.ValueChanged += new System.EventHandler(this.chg);
             // 
             // label8
             // 
@@ -392,8 +414,8 @@
             // openFileDialog1
             // 
             this.openFileDialog1.DefaultExt = "txt";
-            this.openFileDialog1.Filter = "model.txt|model.txt|全てのファイル|*.*";
-            this.openFileDialog1.Title = "model.txtの選択";
+            this.openFileDialog1.Filter = "model.json|model.json|JSONファイル|*.json|全てのファイル|*.*";
+            this.openFileDialog1.Title = "model.jsonの選択";
             // 
             // label12
             // 
@@ -404,95 +426,95 @@
             this.label12.TabIndex = 26;
             this.label12.Text = "体の振れ幅";
             // 
-            // numericUpDown10
+            // bodyFurehaba
             // 
-            this.numericUpDown10.Location = new System.Drawing.Point(74, 282);
-            this.numericUpDown10.Maximum = new decimal(new int[] {
+            this.bodyFurehaba.Location = new System.Drawing.Point(74, 282);
+            this.bodyFurehaba.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown10.Minimum = new decimal(new int[] {
+            this.bodyFurehaba.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown10.Name = "numericUpDown10";
-            this.numericUpDown10.Size = new System.Drawing.Size(87, 19);
-            this.numericUpDown10.TabIndex = 27;
-            this.numericUpDown10.ValueChanged += new System.EventHandler(this.chg);
+            this.bodyFurehaba.Name = "bodyFurehaba";
+            this.bodyFurehaba.Size = new System.Drawing.Size(87, 19);
+            this.bodyFurehaba.TabIndex = 27;
+            this.bodyFurehaba.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown11
+            // headFurehaba
             // 
-            this.numericUpDown11.Location = new System.Drawing.Point(74, 306);
-            this.numericUpDown11.Maximum = new decimal(new int[] {
+            this.headFurehaba.Location = new System.Drawing.Point(74, 306);
+            this.headFurehaba.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown11.Minimum = new decimal(new int[] {
+            this.headFurehaba.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown11.Name = "numericUpDown11";
-            this.numericUpDown11.Size = new System.Drawing.Size(87, 19);
-            this.numericUpDown11.TabIndex = 28;
-            this.numericUpDown11.ValueChanged += new System.EventHandler(this.chg);
+            this.headFurehaba.Name = "headFurehaba";
+            this.headFurehaba.Size = new System.Drawing.Size(87, 19);
+            this.headFurehaba.TabIndex = 28;
+            this.headFurehaba.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown12
+            // fureSpeed
             // 
-            this.numericUpDown12.Location = new System.Drawing.Point(74, 331);
-            this.numericUpDown12.Maximum = new decimal(new int[] {
+            this.fureSpeed.Location = new System.Drawing.Point(74, 331);
+            this.fureSpeed.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown12.Minimum = new decimal(new int[] {
+            this.fureSpeed.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown12.Name = "numericUpDown12";
-            this.numericUpDown12.Size = new System.Drawing.Size(87, 19);
-            this.numericUpDown12.TabIndex = 29;
-            this.numericUpDown12.ValueChanged += new System.EventHandler(this.chg);
+            this.fureSpeed.Name = "fureSpeed";
+            this.fureSpeed.Size = new System.Drawing.Size(87, 19);
+            this.fureSpeed.TabIndex = 29;
+            this.fureSpeed.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown14
+            // headPointerSize
             // 
-            this.numericUpDown14.Location = new System.Drawing.Point(75, 403);
-            this.numericUpDown14.Maximum = new decimal(new int[] {
+            this.headPointerSize.Location = new System.Drawing.Point(75, 403);
+            this.headPointerSize.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown14.Minimum = new decimal(new int[] {
+            this.headPointerSize.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown14.Name = "numericUpDown14";
-            this.numericUpDown14.Size = new System.Drawing.Size(86, 19);
-            this.numericUpDown14.TabIndex = 31;
-            this.numericUpDown14.ValueChanged += new System.EventHandler(this.chg);
+            this.headPointerSize.Name = "headPointerSize";
+            this.headPointerSize.Size = new System.Drawing.Size(86, 19);
+            this.headPointerSize.TabIndex = 31;
+            this.headPointerSize.ValueChanged += new System.EventHandler(this.chg);
             // 
-            // numericUpDown15
+            // pointerHoseX
             // 
-            this.numericUpDown15.Location = new System.Drawing.Point(270, 59);
-            this.numericUpDown15.Maximum = new decimal(new int[] {
-            750,
+            this.pointerHoseX.Location = new System.Drawing.Point(270, 59);
+            this.pointerHoseX.Maximum = new decimal(new int[] {
+            3000,
             0,
             0,
             0});
-            this.numericUpDown15.Minimum = new decimal(new int[] {
-            750,
+            this.pointerHoseX.Minimum = new decimal(new int[] {
+            3000,
             0,
             0,
             -2147483648});
-            this.numericUpDown15.Name = "numericUpDown15";
-            this.numericUpDown15.Size = new System.Drawing.Size(46, 19);
-            this.numericUpDown15.TabIndex = 32;
-            this.numericUpDown15.ValueChanged += new System.EventHandler(this.chg);
+            this.pointerHoseX.Name = "pointerHoseX";
+            this.pointerHoseX.Size = new System.Drawing.Size(46, 19);
+            this.pointerHoseX.TabIndex = 32;
+            this.pointerHoseX.ValueChanged += new System.EventHandler(this.chg);
             // 
             // label13
             // 
@@ -533,29 +555,29 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(165, 86);
+            this.label18.Location = new System.Drawing.Point(167, 84);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(97, 12);
             this.label18.TabIndex = 42;
             this.label18.Text = "目の動きの補整(Y)";
             // 
-            // numericUpDown13
+            // eyePointerSize
             // 
-            this.numericUpDown13.Location = new System.Drawing.Point(75, 378);
-            this.numericUpDown13.Maximum = new decimal(new int[] {
+            this.eyePointerSize.Location = new System.Drawing.Point(75, 378);
+            this.eyePointerSize.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown13.Minimum = new decimal(new int[] {
+            this.eyePointerSize.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown13.Name = "numericUpDown13";
-            this.numericUpDown13.Size = new System.Drawing.Size(86, 19);
-            this.numericUpDown13.TabIndex = 43;
-            this.numericUpDown13.ValueChanged += new System.EventHandler(this.chg);
+            this.eyePointerSize.Name = "eyePointerSize";
+            this.eyePointerSize.Size = new System.Drawing.Size(86, 19);
+            this.eyePointerSize.TabIndex = 43;
+            this.eyePointerSize.ValueChanged += new System.EventHandler(this.chg);
             // 
             // checkBox1
             // 
@@ -577,59 +599,232 @@
             this.label15.TabIndex = 45;
             this.label15.Text = "頭の動く幅";
             // 
-            // numericUpDown16
+            // pointerHoseY
             // 
-            this.numericUpDown16.Location = new System.Drawing.Point(270, 86);
-            this.numericUpDown16.Maximum = new decimal(new int[] {
+            this.pointerHoseY.Location = new System.Drawing.Point(270, 86);
+            this.pointerHoseY.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.pointerHoseY.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.pointerHoseY.Name = "pointerHoseY";
+            this.pointerHoseY.Size = new System.Drawing.Size(46, 19);
+            this.pointerHoseY.TabIndex = 46;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(167, 109);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(60, 12);
+            this.label19.TabIndex = 47;
+            this.label19.Text = "瞬きの間隔";
+            // 
+            // mabatakiKankaku
+            // 
+            this.mabatakiKankaku.Location = new System.Drawing.Point(233, 107);
+            this.mabatakiKankaku.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.mabatakiKankaku.Name = "mabatakiKankaku";
+            this.mabatakiKankaku.Size = new System.Drawing.Size(83, 19);
+            this.mabatakiKankaku.TabIndex = 48;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(167, 134);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(60, 12);
+            this.label20.TabIndex = 49;
+            this.label20.Text = "瞬きの時間";
+            // 
+            // mabatakiTime
+            // 
+            this.mabatakiTime.Location = new System.Drawing.Point(233, 132);
+            this.mabatakiTime.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.mabatakiTime.Name = "mabatakiTime";
+            this.mabatakiTime.Size = new System.Drawing.Size(83, 19);
+            this.mabatakiTime.TabIndex = 50;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(167, 159);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(65, 12);
+            this.label21.TabIndex = 51;
+            this.label21.Text = "瞬きの大きさ";
+            // 
+            // mabatakiSize
+            // 
+            this.mabatakiSize.Location = new System.Drawing.Point(238, 157);
+            this.mabatakiSize.Name = "mabatakiSize";
+            this.mabatakiSize.Size = new System.Drawing.Size(78, 19);
+            this.mabatakiSize.TabIndex = 52;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(167, 184);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(56, 12);
+            this.label22.TabIndex = 53;
+            this.label22.Text = "口の大きさ";
+            // 
+            // mouthSize
+            // 
+            this.mouthSize.Location = new System.Drawing.Point(229, 182);
+            this.mouthSize.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.mouthSize.Name = "mouthSize";
+            this.mouthSize.Size = new System.Drawing.Size(87, 19);
+            this.mouthSize.TabIndex = 54;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(167, 209);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(86, 12);
+            this.label23.TabIndex = 55;
+            this.label23.Text = "閉じた口の大きさ";
+            // 
+            // closeMouthSize
+            // 
+            this.closeMouthSize.Location = new System.Drawing.Point(259, 207);
+            this.closeMouthSize.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.closeMouthSize.Name = "closeMouthSize";
+            this.closeMouthSize.Size = new System.Drawing.Size(57, 19);
+            this.closeMouthSize.TabIndex = 56;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(167, 234);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(51, 12);
+            this.label24.TabIndex = 57;
+            this.label24.Text = "口の位置";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(224, 232);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
             750,
             0,
             0,
             0});
-            this.numericUpDown16.Minimum = new decimal(new int[] {
+            this.numericUpDown1.Minimum = new decimal(new int[] {
             750,
             0,
             0,
             -2147483648});
-            this.numericUpDown16.Name = "numericUpDown16";
-            this.numericUpDown16.Size = new System.Drawing.Size(46, 19);
-            this.numericUpDown16.TabIndex = 46;
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(92, 19);
+            this.numericUpDown1.TabIndex = 58;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(167, 259);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(57, 12);
+            this.label25.TabIndex = 59;
+            this.label25.Text = "口の動く幅";
+            // 
+            // mouthPointerSize
+            // 
+            this.mouthPointerSize.Location = new System.Drawing.Point(230, 257);
+            this.mouthPointerSize.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.mouthPointerSize.Name = "mouthPointerSize";
+            this.mouthPointerSize.Size = new System.Drawing.Size(86, 19);
+            this.mouthPointerSize.TabIndex = 60;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(669, 31);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(103, 16);
+            this.checkBox2.TabIndex = 61;
+            this.checkBox2.Text = "ホットリロードする";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this.numericUpDown16);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.mouthPointerSize);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.closeMouthSize);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.mouthSize);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.mabatakiSize);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.mabatakiTime);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.mabatakiKankaku);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.pointerHoseY);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.numericUpDown13);
+            this.Controls.Add(this.eyePointerSize);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.numericUpDown15);
-            this.Controls.Add(this.numericUpDown14);
-            this.Controls.Add(this.numericUpDown12);
-            this.Controls.Add(this.numericUpDown11);
-            this.Controls.Add(this.numericUpDown10);
+            this.Controls.Add(this.pointerHoseX);
+            this.Controls.Add(this.headPointerSize);
+            this.Controls.Add(this.fureSpeed);
+            this.Controls.Add(this.headFurehaba);
+            this.Controls.Add(this.bodyFurehaba);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.numericUpDown9);
-            this.Controls.Add(this.numericUpDown8);
-            this.Controls.Add(this.numericUpDown7);
-            this.Controls.Add(this.numericUpDown6);
-            this.Controls.Add(this.numericUpDown5);
+            this.Controls.Add(this.eyeKankaku);
+            this.Controls.Add(this.eyeSize);
+            this.Controls.Add(this.eyePos);
+            this.Controls.Add(this.headSize);
+            this.Controls.Add(this.headY);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.numericUpDown4);
-            this.Controls.Add(this.numericUpDown3);
+            this.Controls.Add(this.neckY);
+            this.Controls.Add(this.bodySize);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.bodyCentY);
+            this.Controls.Add(this.bodyY);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
@@ -642,23 +837,30 @@
             this.MaximumSize = new System.Drawing.Size(800, 500);
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "Form1";
-            this.Text = "model.txtエディター";
+            this.Text = "model.jsonエディター";
+            ((System.ComponentModel.ISupportInitialize)(this.bodyY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bodyCentY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bodySize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.neckY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.headY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.headSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eyePos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eyeSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eyeKankaku)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bodyFurehaba)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.headFurehaba)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fureSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.headPointerSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pointerHoseX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eyePointerSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pointerHoseY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mabatakiKankaku)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mabatakiTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mabatakiSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mouthSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeMouthSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mouthPointerSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -674,18 +876,18 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown bodyY;
+        private System.Windows.Forms.NumericUpDown bodyCentY;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.NumericUpDown bodySize;
+        private System.Windows.Forms.NumericUpDown neckY;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown6;
-        private System.Windows.Forms.NumericUpDown numericUpDown7;
-        private System.Windows.Forms.NumericUpDown numericUpDown8;
-        private System.Windows.Forms.NumericUpDown numericUpDown9;
+        private System.Windows.Forms.NumericUpDown headY;
+        private System.Windows.Forms.NumericUpDown headSize;
+        private System.Windows.Forms.NumericUpDown eyePos;
+        private System.Windows.Forms.NumericUpDown eyeSize;
+        private System.Windows.Forms.NumericUpDown eyeKankaku;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
@@ -693,20 +895,35 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.NumericUpDown numericUpDown10;
-        private System.Windows.Forms.NumericUpDown numericUpDown11;
-        private System.Windows.Forms.NumericUpDown numericUpDown12;
-        private System.Windows.Forms.NumericUpDown numericUpDown14;
-        private System.Windows.Forms.NumericUpDown numericUpDown15;
+        private System.Windows.Forms.NumericUpDown bodyFurehaba;
+        private System.Windows.Forms.NumericUpDown headFurehaba;
+        private System.Windows.Forms.NumericUpDown fureSpeed;
+        private System.Windows.Forms.NumericUpDown headPointerSize;
+        private System.Windows.Forms.NumericUpDown pointerHoseX;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.NumericUpDown numericUpDown13;
+        private System.Windows.Forms.NumericUpDown eyePointerSize;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown numericUpDown16;
+        private System.Windows.Forms.NumericUpDown pointerHoseY;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.NumericUpDown mabatakiKankaku;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.NumericUpDown mabatakiTime;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.NumericUpDown mabatakiSize;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.NumericUpDown mouthSize;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown closeMouthSize;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.NumericUpDown mouthPointerSize;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
 
