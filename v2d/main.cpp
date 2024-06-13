@@ -43,6 +43,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     now = GetNowCount();
     nl = HEIGHT - stg.HeadY;
     ep = HEIGHT - stg.EyePos;
+    isclose = true;
 
     body = Sprite(BodyImage,
         vct2d(WIDTH / 2, stg.BodyY),
@@ -62,25 +63,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         stg.EyeSize, true);
 
     mouth = Sprite(MouthImage,
-        vct2d(), vct2d(),
-        7);
+        vct2d(), vct2d(), 7);
     #pragma endregion
 
     while (CheckHitKey(KEY_INPUT_F5)); //リセットループ防止
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_END) == 0) {
-        while (now < GetNowCount() - 16) {
-            now += 16;
-            tick++;
-            mouth.Stren = vd.Loop(isclose);
-            if (isclose) {
-                mouth.Stren = mouth.Stren * stg.CloseMouthSize / 100;
-            }
-            else {
-                mouth.Stren = mouth.Stren * stg.MouthSize / 100;
-            }
-            mouth.Image = isclose ? MouthCloseImage : MouthImage;
-            so += (double)stg.FureSpeed / 1000;
-        }
+        tick++;
+        so += (double)stg.FureSpeed / 1000;
         #pragma region DxLib描画系
         if (CheckHitKey(KEY_INPUT_F5) || isNeedReload) {
             isNeedReload = false;
@@ -131,7 +120,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             vct2d(0, ep),
             head.Deg - stg.EyeKankaku);
 
-        //瞬き
+        #pragma region 瞬き
         md = tick % stg.MabatakiKankaku;
         if (md < stg.MabatakiTime) {
             if (md < stg.MabatakiTime / 2) {
@@ -149,10 +138,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             eye1.Stren = vct2d(1, 1);
         }
         eye2.Stren = eye1.Stren;
+        #pragma endregion
 
+        #pragma region 口
+
+        mouth.Stren = vd.Loop(isclose);
+        if (isclose) {
+            mouth.Stren = mouth.Stren * stg.CloseMouthSize / 100;
+        }
+        else {
+            mouth.Stren = mouth.Stren * stg.MouthSize / 100;
+        }
+        mouth.Image = isclose ? MouthCloseImage : MouthImage;
         mouth.Pos = TurnV(vct2d(head.Pos + Mouse * stg.MouthPointerSize / 100),
             vct2d(0, stg.MouthY), head.Deg);
         mouth.Deg = head.Deg;
+
+        #pragma endregion
 
         draw:
         head.Draw();
@@ -162,7 +164,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         mouth.Draw();
         ScreenFlip();
         #pragma endregion
-        
     }
 
     DeleteGraph(BodyImage);

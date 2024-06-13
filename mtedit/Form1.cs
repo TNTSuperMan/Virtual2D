@@ -125,7 +125,7 @@ namespace mtedit
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (isOpen)
+            if (!isOpen)
             {
                 checkBox2.Checked = false;
                 return;
