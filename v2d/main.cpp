@@ -83,6 +83,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         }
         #pragma region DxLib描画系
         if (CheckHitKey(KEY_INPUT_F5) || isNeedReload) {
+            isNeedReload = false;
             DeleteGraph(BodyImage);
             DeleteGraph(HeadImage);
             DeleteGraph(EyeImage);

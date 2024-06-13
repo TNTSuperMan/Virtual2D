@@ -55,6 +55,13 @@ namespace mtedit
                 HeadPointerSize = (int)headPointerSize.Value,
                 PointerHoseX = (int)pointerHoseX.Value,
                 PointerHoseY = (int)pointerHoseY.Value,
+                MouthSize = (int)mouthSize.Value,
+                CloseMouthSize = (int)closeMouthSize.Value,
+                MouthY = (int)mouthY.Value,
+                MouthPointerSize = (int)mouthPointerSize.Value,
+                MabatakiKankaku = (int)mabatakiKankaku.Value,
+                MabatakiSize = (int)mabatakiSize.Value,
+                MabatakiTime = (int)mabatakiTime.Value
             };
             string jstr = JsonSerializer.Serialize(model);
             File.WriteAllText(fpath, jstr);
@@ -101,14 +108,28 @@ namespace mtedit
                 eyePointerSize.Value = model.EyePointerSize;
                 headPointerSize.Value = model.HeadPointerSize;
                 pointerHoseX.Value = model.PointerHoseX;
-                pointerHoseX.Value = model.PointerHoseY;
-
+                pointerHoseY.Value = model.PointerHoseY;
+                mouthY.Value = model.MouthY;
+                mouthSize.Value = model.MouthSize;
+                mouthPointerSize.Value = model.MouthPointerSize;
+                mouthSize.Value = model.MouthSize;
+                closeMouthSize.Value = model.CloseMouthSize;
+                mouthY.Value = model.MouthY;
+                mouthPointerSize.Value = model.MouthPointerSize;
+                mabatakiKankaku.Value = model.MabatakiKankaku;
+                mabatakiSize.Value = model.MabatakiSize;
+                mabatakiTime.Value = model.MabatakiTime;
                 isOkEdit = true;
             }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
+            if (isOpen)
+            {
+                checkBox2.Checked = false;
+                return;
+            }
             if (checkBox2.Checked)
             {
                 foreach (Process p in Process.GetProcesses())
@@ -121,9 +142,11 @@ namespace mtedit
                         {
                             v2dprc = p;
                             v2dprc.Exited += v2dprcClosed;
+                            return;
                         }
                     }
                 }
+                checkBox2.Checked = false;
             }
         }
         private void v2dprcClosed(object sender, EventArgs e)
@@ -133,7 +156,9 @@ namespace mtedit
                 MessageBox.Show("Virtual2Dが停止したため、\nホットリロードが出来なくなりました。", "model.jsonエディタ");
                 v2dprc.Exited -= v2dprcClosed;
                 v2dprc = null;
+                return;
             }
+            
         }
         [JsonSerializable(typeof(Model))]
         public class Model
