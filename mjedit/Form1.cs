@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Forms;
 
-namespace mtedit
+namespace mjedit
 {
     public partial class Form1 : Form
     {

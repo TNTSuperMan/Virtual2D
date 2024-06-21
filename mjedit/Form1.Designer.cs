@@ -1,4 +1,4 @@
-﻿namespace mtedit
+﻿namespace mjedit
 {
     partial class Form1
     {
