@@ -24,9 +24,9 @@ void Initializer::Image(int& BodyImage, int& HeadImage, int& EyeImage, int& Mout
     EyeImage = LoadGraph(".\\model\\eye.png");
     MouthImage = LoadGraph(".\\model\\mouth.png");
     MouthCloseImage = LoadGraph(".\\model\\mouth_close.png");
-    if (BodyImage == -1) MessageBoxA(NULL, ".\\model\\body.pngにアクセスできません。\n無視して続行します。", APP_NAME, MB_OK);
-    if (HeadImage == -1) MessageBoxA(NULL, ".\\model\\head.pngにアクセスできません。\n無視して続行します。", APP_NAME, MB_OK);
-    if (EyeImage == -1) MessageBoxA(NULL, ".\\model\\eye.pngにアクセスできません。\n無視して続行します。", APP_NAME, MB_OK);
-    if (MouthImage == -1) MessageBoxA(NULL, ".\\model\\mouth.pngにアクセスできません。\n無視して続行します。", APP_NAME, MB_OK);
-    if (MouthCloseImage == -1) MessageBoxA(NULL, ".\\model\\mouth_close.pngにアクセスできません。\n無視して続行します。", APP_NAME, MB_OK);
+    if (BodyImage == -1) Dialog(".\\model\\body.pngにアクセスできません。\n無視して続行します。");
+    if (HeadImage == -1) Dialog(".\\model\\head.pngにアクセスできません。\n無視して続行します。");
+    if (EyeImage == -1) Dialog(".\\model\\eye.pngにアクセスできません。\n無視して続行します。");
+    if (MouthImage == -1) Dialog(".\\model\\mouth.pngにアクセスできません。\n無視して続行します。");
+    if (MouthCloseImage == -1) Dialog(".\\model\\mouth_close.pngにアクセスできません。\n無視して続行します。");
 }

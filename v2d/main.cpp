@@ -23,23 +23,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     #pragma region 変数宣言
 
     int BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage,
-         nl, MouseX, MouseY, ep, now;
+        nl, MouseX, MouseY, ep, now, tick = 0;
     Sprite body, head, eye1, eye2, mouth;
     double so = 0, tDeg = 0, md;
     bool isclose;
-    ULONG64 tick = 0;
     vct2d Mouse;
     Setting stg;
 
     #pragma endregion
 
-    
     vtubeloop:;
 
     #pragma region 初期化
     clsDx();
     Initializer::Image(BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage);
     stg = *(new Setting());
+    if (!stg.isInitialized) goto vtubeloop;
     now = GetNowCount();
     nl = HEIGHT - stg.HeadY;
     ep = HEIGHT - stg.EyePos;
@@ -69,8 +68,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     while (CheckHitKey(KEY_INPUT_F5)); //リセットループ防止
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_END) == 0) {
         tick++;
-        so += (double)stg.FureSpeed / 1000;
-        #pragma region DxLib描画系
         if (CheckHitKey(KEY_INPUT_F5) || isNeedReload) {
             isNeedReload = false;
             DeleteGraph(BodyImage);
@@ -82,6 +79,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         ClearDrawScreen();
         DrawBox(0, 0, WIDTH, HEIGHT, stg.backgroundColor, 1);
         GetMousePoint(&MouseX, &MouseY);
+
+        #pragma region 体
 
         if (stg.GetdownMode) {
             body.Pos = vct2d(rand() % WIDTH, rand() % HEIGHT);
@@ -96,6 +95,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             mouth.Deg = rand() % 360;
             goto draw;
         }
+
+        so = (double)stg.FureSpeed / 1000 * tick;
 
         tDeg = sin(so) * stg.BodyFurehaba;
         head.Deg = sin(so -1) * stg.HeadFurehaba;
@@ -119,6 +120,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             vct2d(head.Pos + Mouse),
             vct2d(0, ep),
             head.Deg - stg.EyeKankaku);
+
+        #pragma endregion
 
         #pragma region 瞬き
         md = tick % stg.MabatakiKankaku;
@@ -163,7 +166,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         eye2.Draw();
         mouth.Draw();
         ScreenFlip();
-        #pragma endregion
     }
 
     DeleteGraph(BodyImage);

@@ -29,5 +29,7 @@ public:
 	int CloseMouthSize; //閉じてる口の大きさ
 	int MouthY;         //口の位置
 	int MouthPointerSize;//口がどのくらいポインタに影響されるか
+
+	bool isInitialized = false; //設定初期化
 	Setting();
 };

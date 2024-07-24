@@ -44,10 +44,13 @@ Setting::Setting() {
 		set(CloseMouthSize);
 		set(MouthY);
 		set(MouthPointerSize);
-		
+		if (HeadPointerSize == 0) {
+			Dialog(".\\model\\model.jsonの設定\"HeadPointerSize\"が0です。\n0以外にしてください。");
+		}
+		isInitialized = true;
 	}
 	catch (...) {
-		Dialog(".\\model\\mode.jsonの記述が不正です。");
+		Dialog(".\\model\\model.jsonの記述が不正です。");
 	}
 
 }

@@ -30,7 +30,7 @@
     <ClCompile Include="Setting.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="DIalog.cpp">
+    <ClCompile Include="Dialog.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="speaker.cpp">
@@ -74,10 +74,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\x64\Debug\model\model.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
-    <None Include="..\x64\Debug\model\a.json" />
   </ItemGroup>
 </Project>

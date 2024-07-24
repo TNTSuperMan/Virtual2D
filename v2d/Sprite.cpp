@@ -2,7 +2,7 @@
 
 void Sprite::Draw() {
 	DrawRotaGraph3(Pos.x , Pos.y,
-		Cent.x + sizex / 2, Cent.y + sizey / 2,
+		Cent.x + (double)sizex / 2, Cent.y + (double)sizey / 2,
 		Size / 100 * Stren.x,
 		Size / 100 * Stren.y,
 		Deg * A_DEG,

@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <DxLib.h>
 #include "define.h"
+#include "Dialog.h"
 
 class Initializer
 {

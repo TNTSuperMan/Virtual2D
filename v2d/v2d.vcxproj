@@ -158,7 +158,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DIalog.cpp" />
+    <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="Setting.cpp" />
     <ClCompile Include="speaker.cpp" />
@@ -183,10 +183,6 @@
     <Image Include="icon1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\x64\Debug\model\model.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\x64\Debug\model\a.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

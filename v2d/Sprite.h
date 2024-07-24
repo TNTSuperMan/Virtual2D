@@ -19,7 +19,7 @@ public:
 	vct2d Stren; //L‚Ñ
 	double Size; //‘å‚«‚³@100‚ªŠî€
 	double Deg; //‰ñ“]@360“x‚Åˆê‰ñ“]‚¾Ö
-	virtual void Draw();
+	void Draw();
 	Sprite();
 	Sprite(int i,vct2d p, vct2d c, double s, int hanten = 0);
 };

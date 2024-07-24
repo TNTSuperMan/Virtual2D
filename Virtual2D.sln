@@ -7,7 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v2d", "v2d\v2d.vcxproj", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{EAA87614-8F5B-462E-A4E7-281C54F9572E}"
 	ProjectSection(SolutionItems) = preProject
-		DrawRotaGraph3.md = DrawRotaGraph3.md
 		NOTICE.txt = NOTICE.txt
 		readme.md = readme.md
 	EndProjectSection
