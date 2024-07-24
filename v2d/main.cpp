@@ -39,7 +39,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     #pragma region 初期化
     clsDx();
     Initializer::Image(BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage);
-    stg = *(new Setting(1));
+    stg = *(new Setting());
     now = GetNowCount();
     nl = HEIGHT - stg.HeadY;
     ep = HEIGHT - stg.EyePos;

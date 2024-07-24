@@ -30,5 +30,4 @@ public:
 	int MouthY;         //口の位置
 	int MouthPointerSize;//口がどのくらいポインタに影響されるか
 	Setting();
-	Setting(int a);
 };

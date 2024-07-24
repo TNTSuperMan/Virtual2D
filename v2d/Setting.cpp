@@ -2,11 +2,9 @@
 #include "Dialog.h"
 using json = nlohmann::json;
 #define sett(name, type ) name = j[#name].get<type>();
-#define set(name) name = j[#name].get<int>();
+#define set(name) sett(name,int)
 
-Setting::Setting() {}
-
-Setting::Setting(int a) {
+Setting::Setting() {
 	std::ifstream cfg(".\\model\\model.json");
 	if (!cfg || cfg.fail()) {
 		Dialog("設定ファイル\".\\model\\model.json\"にアクセスできません。");
@@ -46,6 +44,7 @@ Setting::Setting(int a) {
 		set(CloseMouthSize);
 		set(MouthY);
 		set(MouthPointerSize);
+		
 	}
 	catch (...) {
 		Dialog(".\\model\\mode.jsonの記述が不正です。");
