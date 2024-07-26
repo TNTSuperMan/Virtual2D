@@ -9,7 +9,6 @@ VoiceData vd;
 bool isNeedReload = false;
 
 LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
-    static HWND inp, btn;
     switch (msg) {
     case WM_DESTROY:
         PostQuitMessage(0);

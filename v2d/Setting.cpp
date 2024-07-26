@@ -46,6 +46,7 @@ Setting::Setting() {
 		set(MouthPointerSize);
 		if (HeadPointerSize == 0) {
 			Dialog(".\\model\\model.json‚Ìİ’è\"HeadPointerSize\"‚ª0‚Å‚·B\n0ˆÈŠO‚É‚µ‚Ä‚­‚¾‚³‚¢B");
+			return;
 		}
 		isInitialized = true;
 	}

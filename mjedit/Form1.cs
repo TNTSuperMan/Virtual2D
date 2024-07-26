@@ -156,6 +156,7 @@ namespace mjedit
                 MessageBox.Show("Virtual2Dが停止したため、\nホットリロードが出来なくなりました。", "model.jsonエディタ");
                 v2dprc.Exited -= v2dprcClosed;
                 v2dprc = null;
+                checkBox2.Checked = false;
                 return;
             }
             
