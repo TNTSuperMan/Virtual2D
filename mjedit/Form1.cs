@@ -66,7 +66,16 @@ namespace mjedit
             string jstr = JsonSerializer.Serialize(model);
             File.WriteAllText(fpath, jstr);
 
-            if (checkBox2.Checked && v2dprc != null) SendMessage(v2dprc.MainWindowHandle, 0xBAFA, IntPtr.Zero, IntPtr.Zero);
+            if (checkBox2.Checked && v2dprc != null) { 
+                if(SendMessage(v2dprc.MainWindowHandle, 0xBAFA, IntPtr.Zero, IntPtr.Zero) != (IntPtr)4545)
+                {
+                    MessageBox.Show("Virtual2Dが停止したため、\nホットリロードが出来なくなりました。", "model.jsonエディタ");
+                    v2dprc.Exited -= v2dprcClosed;
+                    v2dprc = null;
+                    checkBox2.Checked = false;
+                    return;
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
