@@ -1,9 +1,9 @@
 #pragma once
 #include <DxLib.h>
 #include <cmath>
-#include "vector.h"
-#include "define.h"
-#include "vector.h"
+#include "vector.hpp"
+#include "define.hpp"
+#include "vector.hpp"
 
 
 class Sprite

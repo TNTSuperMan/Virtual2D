@@ -1,8 +1,8 @@
 #pragma once
 #include <Windows.h>
 #include <DxLib.h>
-#include "define.h"
-#include "Dialog.h"
+#include "define.hpp"
+#include "Dialog.hpp"
 
 class Initializer
 {

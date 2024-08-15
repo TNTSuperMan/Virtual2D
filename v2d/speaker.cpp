@@ -1,4 +1,4 @@
-#include "speaker.h"
+#include "speaker.hpp"
 #define Mouth(type,width,height) case type:ret=vct2d(width,height);break;
 using json = nlohmann::json;
 
@@ -64,6 +64,9 @@ LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
     case 0xBAFA:
         isNeedReload = true;
         return 4545; break;
+    case 0xBEEF:
+
+        return 1919; break;
     }
     return DefWindowProc(hWnd, msg, wp, lp);
 }
@@ -80,19 +83,17 @@ void VoiceData::Add(int wait, char say) {
     waittime.push_back(wait);
     saydata.push_back(say);
 }
-vct2d VoiceData::Loop(bool& isclose) {
+vct2d VoiceData::Loop() {
     if (isplay) {
         /* Œû‚ÌŒ`‚ðŒvŽZ */
         vct2d ret = vct2d(1,1);
         if (!CheckSoundFile()) {
             isplay = false;
-            isclose = true;
             return vct2d(1, 1);
         }
         ULONG sum = 0;
         int i = -1;
         if (waitsum <= tick) {
-            isclose = true;
             return vct2d(1, 1);
         }
         do
@@ -120,12 +121,10 @@ vct2d VoiceData::Loop(bool& isclose) {
             Mouth('p', 0.75, 0.3);
         }
         tick++;
-        isclose = false;
         return ret;
     }
     else {
         tick = 0;
-        isclose = true;
         return vct2d(1,1);
     }
 }

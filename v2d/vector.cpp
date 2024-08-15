@@ -1,4 +1,4 @@
-#include "vector.h"
+#include "vector.hpp"
 vct2d::vct2d() {}
 
 vct2d::vct2d(double ax, double ay) {

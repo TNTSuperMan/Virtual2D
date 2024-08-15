@@ -2,12 +2,12 @@
 #include <windowsx.h>
 #include <future>
 #include <DxLib.h>
-#include "Initializer.h"
-#include "Sprite.h"
-#include "Setting.h"
-#include "define.h"
-#include "speaker.h"
-#include "vector.h"
+#include "Initializer.hpp"
+#include "sprite.hpp"
+#include "setting.hpp"
+#include "define.hpp"
+#include "speaker.hpp"
+#include "vector.hpp"
 using namespace std;
 
 
@@ -23,10 +23,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     #pragma region 変数宣言
 
     int BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage,
-        nl, MouseX, MouseY, ep, now, tick = 0;
+        nl, MouseX, MouseY, ep, starttime;
     Sprite body, head, eye1, eye2, mouth;
-    double so = 0, tDeg = 0, md;
-    bool isclose;
+    double so = 0, tDeg = 0, md, tick = 0, oldtick = 0;
     vct2d Mouse;
     Setting stg;
 
@@ -39,10 +38,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     Initializer::Image(BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage);
     stg = *(new Setting());
     if (!stg.isInitialized) goto vtubeloop;
-    now = GetNowCount();
+    starttime = GetNowCount();
     nl = HEIGHT - stg.HeadY;
     ep = HEIGHT - stg.EyePos;
-    isclose = true;
 
     body = Sprite(BodyImage,
         vct2d(WIDTH / 2, stg.BodyY),
@@ -67,7 +65,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
     while (CheckHitKey(KEY_INPUT_F5)); //リセットループ防止
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_END) == 0) {
-        tick++;
+        tick = (GetNowCount() - starttime) / (50 / 3);
+        
         if (CheckHitKey(KEY_INPUT_F5) || isNeedReload) {
             isNeedReload = false;
             DeleteGraph(BodyImage);
@@ -93,6 +92,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
             eye2.Deg = rand() % 360;
             mouth.Pos = vct2d(rand() % WIDTH, rand() % HEIGHT);
             mouth.Deg = rand() % 360;
+            mouth.Image = MouthCloseImage;
             goto draw;
         }
 
@@ -124,7 +124,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         #pragma endregion
 
         #pragma region 瞬き
-        md = tick % stg.MabatakiKankaku;
+        md = (int)(tick) % stg.MabatakiKankaku;
         if (md < stg.MabatakiTime) {
             if (md < stg.MabatakiTime / 2) {
                 md = (double)(1 - (double)stg.MabatakiSize / 100) / (stg.MabatakiTime / 2) * (stg.MabatakiTime / 2 - md) + (double)stg.MabatakiSize / 100;
@@ -144,15 +144,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         #pragma endregion
 
         #pragma region 口
-
-        mouth.Stren = vd.Loop(isclose);
-        if (isclose) {
-            mouth.Stren = mouth.Stren * stg.CloseMouthSize / 100;
+        
+        while (oldtick < tick) {
+            mouth.Stren = vd.Loop();
+            oldtick++;
         }
-        else {
+        if (vd.isplay) {
             mouth.Stren = mouth.Stren * stg.MouthSize / 100;
         }
-        mouth.Image = isclose ? MouthCloseImage : MouthImage;
+        else {
+            mouth.Stren = vct2d(1,1) * stg.CloseMouthSize / 100;
+        }
+        mouth.Image = vd.isplay ? MouthImage : MouthCloseImage;
         mouth.Pos = TurnV(vct2d(head.Pos + Mouse * stg.MouthPointerSize / 100),
             vct2d(0, stg.MouthY), head.Deg);
         mouth.Deg = head.Deg;

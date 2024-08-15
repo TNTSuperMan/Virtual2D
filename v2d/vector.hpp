@@ -1,6 +1,6 @@
 #pragma once
 #include <cmath>
-#include "define.h"
+#include "define.hpp"
 
 struct vct2d { //座標コントロール
 	double x = 0;

@@ -2,7 +2,7 @@
 
 #include "Windows.h"
 #include "DxLib.h"
-#include "vector.h"
+#include "vector.hpp"
 #include <iostream>
 #include <fstream>
 #include <nlohmann/json.hpp>
@@ -19,7 +19,7 @@ public:
 	VoiceData();
 	void Add(int wait, char say);
 	void Start();
-	vct2d Loop(bool& isclose);
+	vct2d Loop();
 };
 
 extern string vpath;

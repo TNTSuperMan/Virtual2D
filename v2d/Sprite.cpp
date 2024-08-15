@@ -1,4 +1,4 @@
-#include "Sprite.h"
+#include "sprite.hpp"
 
 void Sprite::Draw() {
 	DrawRotaGraph3(Pos.x , Pos.y,

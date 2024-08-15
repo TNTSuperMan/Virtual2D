@@ -1,5 +1,5 @@
-#include "Setting.h"
-#include "Dialog.h"
+#include "setting.hpp"
+#include "dialog.hpp"
 using json = nlohmann::json;
 #define sett(name, type ) name = j[#name].get<type>();
 #define set(name) sett(name,int)

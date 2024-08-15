@@ -158,23 +158,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Dialog.cpp" />
+    <ClCompile Include="dialog.cpp" />
     <ClCompile Include="Initializer.cpp" />
-    <ClCompile Include="Setting.cpp" />
+    <ClCompile Include="setting.cpp" />
     <ClCompile Include="speaker.cpp" />
-    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="sprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="define.h" />
-    <ClInclude Include="Dialog.h" />
-    <ClInclude Include="Initializer.h" />
+    <ClInclude Include="define.hpp" />
+    <ClInclude Include="dialog.hpp" />
+    <ClInclude Include="Initializer.hpp" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Setting.h" />
-    <ClInclude Include="speaker.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="vector.h" />
+    <ClInclude Include="setting.hpp" />
+    <ClInclude Include="speaker.hpp" />
+    <ClInclude Include="sprite.hpp" />
+    <ClInclude Include="vector.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
@@ -188,11 +188,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\nlohmann.json.3.11.2\build\native\nlohmann.json.targets" Condition="Exists('..\packages\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" />
+    <Import Project="..\packages\lua.5.4.7\build\native\Lua.targets" Condition="Exists('..\packages\lua.5.4.7\build\native\Lua.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nlohmann.json.3.11.2\build\native\nlohmann.json.targets'))" />
+    <Error Condition="!Exists('..\packages\lua.5.4.7\build\native\Lua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\lua.5.4.7\build\native\Lua.targets'))" />
   </Target>
 </Project>
