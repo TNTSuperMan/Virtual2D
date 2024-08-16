@@ -12,7 +12,7 @@ private:
 	int sizex;
 	int sizey;
 public:
-	bool ishanten;
+	bool isFlip;
 	int Image; //画像　これDxLibのハンドル
 	vct2d Pos; //座標
 	vct2d Cent; //中心座標

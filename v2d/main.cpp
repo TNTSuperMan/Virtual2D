@@ -8,6 +8,7 @@
 #include "define.hpp"
 #include "speaker.hpp"
 #include "vector.hpp"
+#include "anilua.hpp"
 using namespace std;
 
 
@@ -162,6 +163,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
         #pragma endregion
 
+        GetAniluaState(&head, &body, &eye1, &eye2, &mouth);
+        
         draw:
         head.Draw();
         body.Draw();

@@ -158,6 +158,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="anilua.cpp" />
     <ClCompile Include="dialog.cpp" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="setting.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="anilua.hpp" />
     <ClInclude Include="define.hpp" />
     <ClInclude Include="dialog.hpp" />
     <ClInclude Include="Initializer.hpp" />

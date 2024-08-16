@@ -2,11 +2,12 @@
 
 #include "Windows.h"
 #include "DxLib.h"
-#include "vector.hpp"
 #include <iostream>
 #include <fstream>
 #include <nlohmann/json.hpp>
 #include <vector>
+#include "vector.hpp"
+#include "anilua.hpp"
 using namespace std;
 
 class VoiceData {

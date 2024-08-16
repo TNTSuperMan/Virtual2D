@@ -11,13 +11,14 @@ namespace v2dsynth
         [DllImport("user32.dll",SetLastError = true, EntryPoint = "SendMessage")]
         static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
-        void Msg(string msg) => MessageBox.Show(msg, "Virtual2d 発声ウインドウ");
+        void Msg(string msg) => scr = scr;//MessageBox.Show(msg, "Virtual2d 発声ウインドウ");
 
         public Form1()
         {
             InitializeComponent();
             SetWindow(WindowMode.NonConnected);
         }
+        string scr = Path.GetTempFileName();
         #region 変数
         bool isConnected = false;
         IntPtr v2dhwnd = IntPtr.Zero;
@@ -151,12 +152,14 @@ namespace v2dsynth
                     button1.Enabled = true;
                     textBox1.Enabled = false;
                     textBox1.Text = string.Empty;
+                    button3.Enabled = false;
                     break;
                 case WindowMode.Connecting:
                     button1.Text = "接続中";
                     button1.Enabled = false;
                     textBox1.Enabled = false;
                     textBox1.Text = string.Empty;
+                    button3.Enabled = false;
                     break;
                 case WindowMode.Connected:
                     isConnected = true;
@@ -164,14 +167,35 @@ namespace v2dsynth
                     button1.Enabled = true;
                     textBox1.Enabled = true;
                     textBox1.Text = string.Empty;
+                    button3.Enabled = true;
                     break;
                 case WindowMode.Generating:
                     isConnected = true;
                     button1.Text = "生成中";
                     button1.Enabled = false;
                     textBox1.Enabled = false;
+                    button3.Enabled = true;
                     break;
 
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (!isConnected) return;
+            File.WriteAllText(scr, richTextBox1.Text);
+            if (SendMessage(v2dhwnd, 0xBEEF, (IntPtr)0, (IntPtr)0) == (IntPtr)1919)
+            {
+                foreach(char c in scr)
+                {
+                    SendMessage(v2dhwnd, 0xBEEF, (IntPtr)1, (IntPtr)c);
+                }
+                SendMessage(v2dhwnd,0xBEEF, (IntPtr)2,(IntPtr)0);
+            }
+            else
+            {
+                MessageBox.Show("切断されたお");
+                SetWindow(WindowMode.NonConnected);
             }
         }
     }

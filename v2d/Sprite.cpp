@@ -6,7 +6,7 @@ void Sprite::Draw() {
 		Size / 100 * Stren.x,
 		Size / 100 * Stren.y,
 		Deg * A_DEG,
-		Image, 1,ishanten ? 1 : 0);
+		Image, 1, isFlip ? 1 : 0);
 }
 
 Sprite::Sprite() {
@@ -16,19 +16,19 @@ Sprite::Sprite() {
 	Stren = vct2d(1,1);
 	Size = 100;
 	Deg = 0;
-	ishanten = 0;
+	isFlip = 0;
 	sizex = 0;
 	sizey = 0;
 };
 
-Sprite::Sprite(int i, vct2d p, vct2d c, double s,  int hanten) {
+Sprite::Sprite(int i, vct2d p, vct2d c, double s,  int flip) {
 	Image = i;
 	Pos = p;
 	Size = s;
 	Cent = c;
 	Stren = vct2d(1, 1);
 	Deg = 0;
-	ishanten = hanten;
+	isFlip = flip;
 	int* sxp = new int;
 	int* syp = new int;
 	GetGraphSize(i, sxp, syp);
