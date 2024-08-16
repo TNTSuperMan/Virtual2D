@@ -29,9 +29,5 @@ Sprite::Sprite(int i, vct2d p, vct2d c, double s,  int flip) {
 	Stren = vct2d(1, 1);
 	Deg = 0;
 	isFlip = flip;
-	int* sxp = new int;
-	int* syp = new int;
-	GetGraphSize(i, sxp, syp);
-	sizex = *sxp;
-	sizey = *syp;
+	GetGraphSize(i, &sizex, &sizey);
 }
