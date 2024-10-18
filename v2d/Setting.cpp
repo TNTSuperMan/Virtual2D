@@ -13,9 +13,10 @@ Setting::Setting() {
 	char c;
 	json j;
 	std::string fd;
-	while ((c = cfg.get()) != -1) {
+	aniluas.clear();
+	while ((c = cfg.get()) != -1)
 		fd += c;
-	}
+	
 	cfg.close();
 	try {
 		j = json::parse(fd);
@@ -44,6 +45,11 @@ Setting::Setting() {
 		set(CloseMouthSize);
 		set(MouthY);
 		set(MouthPointerSize);
+		if (j["aniluas"].is_array()) {
+			for (json::iterator it = j["aniluas"].begin(); it != j["aniluas"].end(); ++it) {
+				aniluas.push_back(AniLua(*it));
+			}
+		}
 		if (HeadPointerSize == 0) {
 			Dialog(".\\model\\model.json‚Ìİ’è\"HeadPointerSize\"‚ª0‚Å‚·B\n0ˆÈŠO‚É‚µ‚Ä‚­‚¾‚³‚¢B");
 			return;

@@ -1,6 +1,7 @@
 #pragma once
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include "anilua.hpp"
 class Setting
 {
 public:

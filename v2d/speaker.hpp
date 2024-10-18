@@ -7,7 +7,6 @@
 #include <nlohmann/json.hpp>
 #include <vector>
 #include "vector.hpp"
-#include "anilua.hpp"
 using namespace std;
 
 class VoiceData {

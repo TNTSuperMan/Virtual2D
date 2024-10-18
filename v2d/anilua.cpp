@@ -1,13 +1,70 @@
 #include "anilua.hpp"
 
-std::string path;
-lua_State* L;
-bool is_loading = true;
-int startms;
+extern std::vector<AniLua> aniluas;
+extern int startms;
+bool is_running = true;
+
+#pragma region Lua Globals
+int Lprint(lua_State* Le) {
+	const char* str = luaL_checkstring(Le, 1);
+	printfDx(str);
+	return 0;
+}
+
+int Lclear(lua_State* Le) {
+	clsDx();
+	return 0;
+}
+
+int LloadGraph(lua_State* Le) {
+	int id = LoadGraph(luaL_checkstring(Le, 1));
+	lua_pushinteger(Le, id);
+	return 1;
+}
+
+int LdeleteGraph(lua_State* Le) {
+	int id = luaL_checkinteger(Le, 1);
+	DeleteGraph(id);
+	return 0;
+}
+
+#pragma endregion
+
+AniLua::AniLua(std::string path) {
+	L = luaL_newstate();
+	luaL_openlibs(L);
+	luaL_loadfile(L, path.c_str());
+
+	lua_pushcfunction(L, Lprint);
+	lua_setglobal(L, "print");
+
+	lua_pushcfunction(L, Lclear);
+	lua_setglobal(L, "cls");
+
+	lua_pushcfunction(L, LloadGraph);
+	lua_setglobal(L, "loadGraph");
+
+	lua_pushcfunction(L, LdeleteGraph);
+	lua_setglobal(L, "deleteGraph");
+
+	if (lua_pcall(L, 0, 0, 0) != 0) {
+		printfDx("AniLuaスクリプトでエラーが発生しました:\n%s\n", lua_tostring(L, -1));
+		lua_close(L);
+		throw;
+	}
+	else {
+		lua_getglobal(L, "Initialize");
+		if (lua_pcall(L, 0, 0, 0) != 0) {
+			printfDx("AniLuaの初期化スクリプトでエラーが発生しました:\n%s\n", lua_tostring(L, -1));
+			lua_close(L);
+			throw;
+		}
+	}
+}
 
 #pragma region SetToLua
 
-void PushVectorTable(vct2d vec, const char* name) {
+void PushVectorTable(lua_State* L, vct2d vec, const char* name) {
 	lua_pushstring(L, name);
 	lua_newtable(L);
 
@@ -22,13 +79,13 @@ void PushVectorTable(vct2d vec, const char* name) {
 	lua_settable(L, -3);
 }
 
-void PushSpriteTable(Sprite sprite, const char* name) {
+void PushSpriteTable(lua_State* L, Sprite sprite, const char* name) {
 	lua_pushstring(L, name);
 	lua_newtable(L);
 
-	PushVectorTable(sprite.Cent, "Cent");
-	PushVectorTable(sprite.Pos, "Pos");
-	PushVectorTable(sprite.Stren, "Stren");
+	PushVectorTable(L, sprite.Cent, "Cent");
+	PushVectorTable(L, sprite.Pos, "Pos");
+	PushVectorTable(L, sprite.Stren, "Stren");
 
 	lua_pushstring(L, "Deg");
 	lua_pushnumber(L, sprite.Deg);
@@ -53,7 +110,7 @@ void PushSpriteTable(Sprite sprite, const char* name) {
 
 #pragma region SetToV2d
 
-vct2d ReadVectorTable(const char* name) {
+vct2d ReadVectorTable(lua_State* L, const char* name) {
 	vct2d vect;
 	lua_getfield(L, -1, name);
 	lua_getfield(L, -1, "x");
@@ -65,7 +122,7 @@ vct2d ReadVectorTable(const char* name) {
 	return vect;
 }
 
-void ReadSpriteTable(Sprite* sprite, const char* name) {
+void ReadSpriteTable(lua_State* L, Sprite* sprite, const char* name) {
 	lua_getglobal(L, "V2d");
 	lua_getfield(L, -1, name);
 
@@ -85,110 +142,54 @@ void ReadSpriteTable(Sprite* sprite, const char* name) {
 	sprite->isFlip = (luaL_checknumber(L, -1) != 0);
 	lua_pop(L, 1);
 
-	sprite->Pos = ReadVectorTable("Pos");
-	sprite->Cent = ReadVectorTable("Cent");
-	sprite->Stren = ReadVectorTable("Stren");
+	sprite->Pos = ReadVectorTable(L, "Pos");
+	sprite->Cent = ReadVectorTable(L, "Cent");
+	sprite->Stren = ReadVectorTable(L, "Stren");
 	lua_pop(L,2);
 }
 
 #pragma endregion
 
-
-void GetAniluaState(Sprite *head, Sprite* body, Sprite* eye1, Sprite* eye2, Sprite* mouth) {
-	if (is_loading) return;
+void AniLua::CallNext(Sprite *head, Sprite* body, Sprite* eye1, Sprite* eye2, Sprite* mouth) {
 	lua_settop(L,0);
 	lua_newtable(L);
-	PushSpriteTable(*head, "Head");
-	PushSpriteTable(*body, "Body");
-	PushSpriteTable(*eye1, "Eye1");
-	PushSpriteTable(*eye2, "Eye2");
-	PushSpriteTable(*mouth, "Mouth");
+	PushSpriteTable(L, *head, "Head");
+	PushSpriteTable(L, *body, "Body");
+	PushSpriteTable(L, *eye1, "Eye1");
+	PushSpriteTable(L, *eye2, "Eye2");
+	PushSpriteTable(L, *mouth, "Mouth");
 	lua_setglobal(L, "V2d");
 
 	lua_getglobal(L, "Frame"); //Func
 	lua_pushnumber(L, GetNowCount() - startms);
 	try {
 		if (lua_pcall(L, 1, 1, 0) != 0) {
-			printfDx("AniLuaでエラーが発生しました☆:%s\n", lua_tostring(L, -1));
+			printfDx("AniLuaの常時スクリプト内でエラーが発生しました:%s\n", lua_tostring(L, -1));
 			lua_close(L);
-			is_loading = true;
-			return;
+			throw;
 		}
 		else {
-			bool is_next = lua_toboolean(L, -1);
-			ReadSpriteTable(head, "Head");
-			ReadSpriteTable(body, "Body");
-			ReadSpriteTable(eye1, "Eye1");
-			ReadSpriteTable(eye2, "Eye2");
-			ReadSpriteTable(mouth, "Mouth");
-			if (!is_next) {
-				lua_close(L);
-				is_loading = true;
-				return;
-			}
+			ReadSpriteTable(L, head, "Head");
+			ReadSpriteTable(L, body, "Body");
+			ReadSpriteTable(L, eye1, "Eye1");
+			ReadSpriteTable(L, eye2, "Eye2");
+			ReadSpriteTable(L, mouth, "Mouth");
 		}
 	}
 	catch(...){
-		printfDx("あ");
-		is_loading = true;
+		printfDx("AniLuaで例外が発生しました。");
 		lua_close(L);
-		return;
+		throw;
 	}
 }
 
-int Lprint(lua_State* Le) {
-	const char* str = luaL_checkstring(Le, 1);
-	printfDx(str);
-	return 0;
-}
-
-int Lclear(lua_State* Le) {
-	clsDx();
-	return 0;
-}
-
-int LloadGraph(lua_State* Le) {
-	int id = LoadGraph(luaL_checkstring(Le, 1));
-	lua_pushinteger(Le, id);
-	return 1;
-}
-
-int LdeleteGraph(lua_State* Le) {
-	int id = luaL_checkinteger(L, 1);
-	DeleteGraph(id);
-	return 0;
-}
-
-void InitializeAniLua(std::string fname){
-	startms = GetNowCount();
-	L = luaL_newstate();
-	luaL_openlibs(L);
-	luaL_loadfile(L, path.c_str());
-
-	lua_pushcfunction(L, Lprint);
-	lua_setglobal(L, "print");
-
-	lua_pushcfunction(L, Lclear);
-	lua_setglobal(L, "cls");
-
-	lua_pushcfunction(L, LloadGraph);
-	lua_setglobal(L, "loadGraph");
-
-	lua_pushcfunction(L, LdeleteGraph);
-	lua_setglobal(L, "deleteGraph");
-
-	if (lua_pcall(L, 0, 0, 0) != 0) {
-		printfDx("AniLuaでエラーが発生しました:\n%s\n", lua_tostring(L, -1));
-		lua_close(L);
+void GetAniluaState(Sprite* head, Sprite* body, Sprite* eye1, Sprite* eye2, Sprite* mouth) {
+	if (!is_running) return;
+	try {
+		for (int i = 0; i < (int)aniluas.size(); i++)
+			aniluas[i].CallNext(head, body, eye1, eye2, mouth);
 	}
-	else {
-		lua_getglobal(L, "Initialize");
-		if (lua_pcall(L, 0, 0, 0) != 0) {
-			printfDx("AniLuaの初期化関数でエラーが発生しました:\n%s\n", lua_tostring(L, -1));
-			lua_close(L);
-		}
-		else {
-			is_loading = false;
-		}
+	catch(...){
+		is_running = false;
 	}
 }
