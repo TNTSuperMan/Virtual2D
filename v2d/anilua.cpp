@@ -1,7 +1,7 @@
 #include "anilua.hpp"
 
-extern std::vector<AniLua> aniluas;
-extern int startms;
+std::vector<AniLua> aniluas;
+int startms;
 bool is_running = true;
 
 #pragma region Lua Globals
@@ -192,4 +192,12 @@ void GetAniluaState(Sprite* head, Sprite* body, Sprite* eye1, Sprite* eye2, Spri
 	catch(...){
 		is_running = false;
 	}
+}
+
+void ClearAniLua() {
+	aniluas.clear();
+}
+
+void AddAniLua(AniLua data) {
+	aniluas.push_back(data);
 }

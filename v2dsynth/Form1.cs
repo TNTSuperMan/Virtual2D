@@ -152,14 +152,12 @@ namespace v2dsynth
                     button1.Enabled = true;
                     textBox1.Enabled = false;
                     textBox1.Text = string.Empty;
-                    button3.Enabled = false;
                     break;
                 case WindowMode.Connecting:
                     button1.Text = "接続中";
                     button1.Enabled = false;
                     textBox1.Enabled = false;
                     textBox1.Text = string.Empty;
-                    button3.Enabled = false;
                     break;
                 case WindowMode.Connected:
                     isConnected = true;
@@ -167,14 +165,12 @@ namespace v2dsynth
                     button1.Enabled = true;
                     textBox1.Enabled = true;
                     textBox1.Text = string.Empty;
-                    button3.Enabled = true;
                     break;
                 case WindowMode.Generating:
                     isConnected = true;
                     button1.Text = "生成中";
                     button1.Enabled = false;
                     textBox1.Enabled = false;
-                    button3.Enabled = true;
                     break;
 
             }

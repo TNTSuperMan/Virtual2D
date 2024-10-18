@@ -13,7 +13,7 @@ Setting::Setting() {
 	char c;
 	json j;
 	std::string fd;
-	aniluas.clear();
+	ClearAniLua();
 	while ((c = cfg.get()) != -1)
 		fd += c;
 	
@@ -47,7 +47,7 @@ Setting::Setting() {
 		set(MouthPointerSize);
 		if (j["aniluas"].is_array()) {
 			for (json::iterator it = j["aniluas"].begin(); it != j["aniluas"].end(); ++it) {
-				aniluas.push_back(AniLua(*it));
+				AddAniLua(AniLua(*it));
 			}
 		}
 		if (HeadPointerSize == 0) {

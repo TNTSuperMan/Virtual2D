@@ -16,7 +16,7 @@ private:
 	lua_State* L;
 };
 
-extern std::vector<AniLua> aniluas;
-extern int startms;
-
 void GetAniluaState(Sprite *head, Sprite *body, Sprite *eye1, Sprite *eye2, Sprite *mouth);
+
+void AddAniLua(AniLua);
+void ClearAniLua();
