@@ -46,6 +46,7 @@ Setting::Setting() {
 		set(MouthY);
 		set(MouthPointerSize);
 		if (j["aniluas"].is_array()) {
+			SetStartMs();
 			for (json::iterator it = j["aniluas"].begin(); it != j["aniluas"].end(); ++it) {
 				AddAniLua(AniLua(*it));
 			}

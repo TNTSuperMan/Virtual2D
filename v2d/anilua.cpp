@@ -201,3 +201,7 @@ void ClearAniLua() {
 void AddAniLua(AniLua data) {
 	aniluas.push_back(data);
 }
+
+void SetStartMs() {
+	startms = GetNowCount();
+}

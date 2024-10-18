@@ -20,3 +20,4 @@ void GetAniluaState(Sprite *head, Sprite *body, Sprite *eye1, Sprite *eye2, Spri
 
 void AddAniLua(AniLua);
 void ClearAniLua();
+void SetStartMs();
