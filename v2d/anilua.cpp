@@ -73,7 +73,7 @@ void ReadSpriteTable(lua_State* L, Sprite* sprite, const char* name) {
 	lua_pop(L, 1);
 
 	lua_getfield(L, -1, "Image");
-	sprite->Image = luaL_checkinteger(L, -1);
+	sprite->SetGraphic(luaL_checkinteger(L, -1));
 	lua_pop(L, 1);
 
 	lua_getfield(L, -1, "Size");
