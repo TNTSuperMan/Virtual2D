@@ -32,6 +32,7 @@ Sprite::Sprite(int i, vct2d p, vct2d c, double s,  int flip) {
 	GetGraphSize(i, &sizex, &sizey);
 }
 
-void Sprite::SetGraphSize() {
+void Sprite::SetGraphic(int image) {
+	Image = image;
 	GetGraphSize(Image, &sizex, &sizey);
 }

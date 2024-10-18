@@ -126,7 +126,7 @@ int Ldraw(lua_State* L) {
 	lua_pop(L, 1);
 
 	lua_getfield(L, -1, "Image");
-	sprite->Image = luaL_checkinteger(L, -1);
+	sprite->SetGraphic(luaL_checkinteger(L, -1));
 	lua_pop(L, 1);
 
 	lua_getfield(L, -1, "Size");
@@ -140,7 +140,6 @@ int Ldraw(lua_State* L) {
 	sprite->Pos = ReadVectorTable(L, "Pos");
 	sprite->Cent = ReadVectorTable(L, "Cent");
 	sprite->Stren = ReadVectorTable(L, "Stren");
-	sprite->SetGraphSize();
 	sprite->Draw();
 	return 0;
 }
