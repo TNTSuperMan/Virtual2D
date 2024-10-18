@@ -140,6 +140,7 @@ int Ldraw(lua_State* L) {
 	sprite->Pos = ReadVectorTable(L, "Pos");
 	sprite->Cent = ReadVectorTable(L, "Cent");
 	sprite->Stren = ReadVectorTable(L, "Stren");
+	sprite->SetGraphSize();
 	sprite->Draw();
 	return 0;
 }

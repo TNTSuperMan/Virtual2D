@@ -19,7 +19,7 @@ Sprite::Sprite() {
 	isFlip = 0;
 	sizex = 0;
 	sizey = 0;
-};
+}
 
 Sprite::Sprite(int i, vct2d p, vct2d c, double s,  int flip) {
 	Image = i;
@@ -30,4 +30,8 @@ Sprite::Sprite(int i, vct2d p, vct2d c, double s,  int flip) {
 	Deg = 0;
 	isFlip = flip;
 	GetGraphSize(i, &sizex, &sizey);
+}
+
+void Sprite::SetGraphSize() {
+	GetGraphSize(Image, &sizex, &sizey);
 }
