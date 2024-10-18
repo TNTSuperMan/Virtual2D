@@ -8,5 +8,3 @@
 #include "sprite.hpp"
 
 void GetAniluaState(Sprite *head, Sprite *body, Sprite *eye1, Sprite *eye2, Sprite *mouth);
-
-void AniLuaMsg(WPARAM wp, LPARAM lp);

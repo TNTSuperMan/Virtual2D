@@ -159,47 +159,36 @@ int LdeleteGraph(lua_State* Le) {
 	return 0;
 }
 
-void AniLuaMsg(WPARAM wp, LPARAM lp) {
-	switch (wp) {
-	case 0: //Initialize
-		is_loading = true;
-		path.clear();
-		break;
-	case 1: //Input
-		path.append((char*)&lp);
-		break;
-	case 2: //Load
-		startms = GetNowCount();
-		L = luaL_newstate();
-		luaL_openlibs(L);
-		luaL_loadfile(L, path.c_str());
+void InitializeAniLua(std::string fname){
+	startms = GetNowCount();
+	L = luaL_newstate();
+	luaL_openlibs(L);
+	luaL_loadfile(L, path.c_str());
 
-		lua_pushcfunction(L, Lprint);
-		lua_setglobal(L, "print");
+	lua_pushcfunction(L, Lprint);
+	lua_setglobal(L, "print");
 
-		lua_pushcfunction(L, Lclear);
-		lua_setglobal(L, "cls");
+	lua_pushcfunction(L, Lclear);
+	lua_setglobal(L, "cls");
 
-		lua_pushcfunction(L, LloadGraph);
-		lua_setglobal(L, "loadGraph");
+	lua_pushcfunction(L, LloadGraph);
+	lua_setglobal(L, "loadGraph");
 
-		lua_pushcfunction(L, LdeleteGraph);
-		lua_setglobal(L, "deleteGraph");
+	lua_pushcfunction(L, LdeleteGraph);
+	lua_setglobal(L, "deleteGraph");
 
+	if (lua_pcall(L, 0, 0, 0) != 0) {
+		printfDx("AniLuaでエラーが発生しました:\n%s\n", lua_tostring(L, -1));
+		lua_close(L);
+	}
+	else {
+		lua_getglobal(L, "Initialize");
 		if (lua_pcall(L, 0, 0, 0) != 0) {
-			printfDx("AniLuaでエラーが発生しました:\n%s\n", lua_tostring(L, -1));
+			printfDx("AniLuaの初期化関数でエラーが発生しました:\n%s\n", lua_tostring(L, -1));
 			lua_close(L);
 		}
 		else {
-			lua_getglobal(L, "Initialize");
-			if (lua_pcall(L, 0, 0, 0) != 0) {
-				printfDx("AniLuaの初期化関数でエラーが発生しました:\n%s\n", lua_tostring(L, -1));
-				lua_close(L);
-			}
-			else {
-				is_loading = false;
-			}
+			is_loading = false;
 		}
-		break;
 	}
 }

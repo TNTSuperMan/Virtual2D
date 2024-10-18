@@ -179,25 +179,6 @@ namespace v2dsynth
 
             }
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (!isConnected) return;
-            File.WriteAllText(scr, richTextBox1.Text);
-            if (SendMessage(v2dhwnd, 0xBEEF, (IntPtr)0, (IntPtr)0) == (IntPtr)1919)
-            {
-                foreach(char c in scr)
-                {
-                    SendMessage(v2dhwnd, 0xBEEF, (IntPtr)1, (IntPtr)c);
-                }
-                SendMessage(v2dhwnd,0xBEEF, (IntPtr)2,(IntPtr)0);
-            }
-            else
-            {
-                MessageBox.Show("切断されたお");
-                SetWindow(WindowMode.NonConnected);
-            }
-        }
     }
     public enum WindowMode
     {
