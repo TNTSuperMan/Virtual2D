@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -54,7 +55,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.modeljsonDialog = new System.Windows.Forms.OpenFileDialog();
             this.label12 = new System.Windows.Forms.Label();
             this.bodyFurehaba = new System.Windows.Forms.NumericUpDown();
             this.headFurehaba = new System.Windows.Forms.NumericUpDown();
@@ -87,6 +88,14 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label26 = new System.Windows.Forms.Label();
             this.aniluaList = new System.Windows.Forms.ListBox();
+            this.aniluaPathBox = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.aniluaDialog = new System.Windows.Forms.OpenFileDialog();
+            this.aniluaContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.aniluaDeleteBox = new System.Windows.Forms.ToolStripMenuItem();
+            this.aniluaOpenBox = new System.Windows.Forms.ToolStripMenuItem();
+            this.aniluaUpBox = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.bodyY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bodyCentY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bodySize)).BeginInit();
@@ -110,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.closeMouthSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mouthY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mouthPointerSize)).BeginInit();
+            this.aniluaContext.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -414,11 +424,11 @@
             this.colorDialog1.AnyColor = true;
             this.colorDialog1.FullOpen = true;
             // 
-            // openFileDialog1
+            // modeljsonDialog
             // 
-            this.openFileDialog1.DefaultExt = "txt";
-            this.openFileDialog1.Filter = "model.json|model.json|JSONファイル|*.json|全てのファイル|*.*";
-            this.openFileDialog1.Title = "model.jsonの選択";
+            this.modeljsonDialog.DefaultExt = "txt";
+            this.modeljsonDialog.Filter = "model.json|model.json|JSONファイル|*.json|全てのファイル|*.*";
+            this.modeljsonDialog.Title = "model.jsonの選択";
             // 
             // label12
             // 
@@ -788,18 +798,84 @@
             // 
             // aniluaList
             // 
+            this.aniluaList.ContextMenuStrip = this.aniluaContext;
             this.aniluaList.FormattingEnabled = true;
             this.aniluaList.ItemHeight = 12;
-            this.aniluaList.Location = new System.Drawing.Point(322, 34);
+            this.aniluaList.Location = new System.Drawing.Point(320, 34);
             this.aniluaList.Name = "aniluaList";
-            this.aniluaList.Size = new System.Drawing.Size(255, 364);
+            this.aniluaList.Size = new System.Drawing.Size(255, 340);
             this.aniluaList.TabIndex = 63;
+            // 
+            // aniluaPathBox
+            // 
+            this.aniluaPathBox.Location = new System.Drawing.Point(320, 378);
+            this.aniluaPathBox.Name = "aniluaPathBox";
+            this.aniluaPathBox.Size = new System.Drawing.Size(179, 19);
+            this.aniluaPathBox.TabIndex = 64;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(552, 378);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(23, 19);
+            this.button3.TabIndex = 65;
+            this.button3.Text = "+";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(505, 378);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(41, 19);
+            this.button4.TabIndex = 66;
+            this.button4.Text = "参照";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // aniluaDialog
+            // 
+            this.aniluaDialog.Filter = "Luaファイル|*.lua|全てのファイル|*.*";
+            this.aniluaDialog.Title = "AniLuaプラグインを選択";
+            // 
+            // aniluaContext
+            // 
+            this.aniluaContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aniluaDeleteBox,
+            this.aniluaOpenBox,
+            this.aniluaUpBox});
+            this.aniluaContext.Name = "aniluaContext";
+            this.aniluaContext.Size = new System.Drawing.Size(181, 92);
+            // 
+            // aniluaDeleteBox
+            // 
+            this.aniluaDeleteBox.Name = "aniluaDeleteBox";
+            this.aniluaDeleteBox.Size = new System.Drawing.Size(180, 22);
+            this.aniluaDeleteBox.Text = "削除";
+            this.aniluaDeleteBox.Click += new System.EventHandler(this.aniluaDeleteBox_Click);
+            // 
+            // aniluaOpenBox
+            // 
+            this.aniluaOpenBox.Name = "aniluaOpenBox";
+            this.aniluaOpenBox.Size = new System.Drawing.Size(180, 22);
+            this.aniluaOpenBox.Text = "開く";
+            this.aniluaOpenBox.Click += new System.EventHandler(this.aniluaOpenBox_Click);
+            // 
+            // aniluaUpBox
+            // 
+            this.aniluaUpBox.Name = "aniluaUpBox";
+            this.aniluaUpBox.Size = new System.Drawing.Size(180, 22);
+            this.aniluaUpBox.Text = "上と入れ替え";
+            this.aniluaUpBox.Click += new System.EventHandler(this.aniluaUpBox_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 402);
+            this.ClientSize = new System.Drawing.Size(587, 402);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.aniluaPathBox);
             this.Controls.Add(this.aniluaList);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.checkBox2);
@@ -882,6 +958,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.closeMouthSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mouthY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mouthPointerSize)).EndInit();
+            this.aniluaContext.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -914,7 +991,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog modeljsonDialog;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown bodyFurehaba;
         private System.Windows.Forms.NumericUpDown headFurehaba;
@@ -947,6 +1024,14 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.ListBox aniluaList;
+        private System.Windows.Forms.TextBox aniluaPathBox;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.OpenFileDialog aniluaDialog;
+        private System.Windows.Forms.ContextMenuStrip aniluaContext;
+        private System.Windows.Forms.ToolStripMenuItem aniluaDeleteBox;
+        private System.Windows.Forms.ToolStripMenuItem aniluaOpenBox;
+        private System.Windows.Forms.ToolStripMenuItem aniluaUpBox;
     }
 }
 
