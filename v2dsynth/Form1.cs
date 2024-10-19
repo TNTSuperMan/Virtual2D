@@ -11,7 +11,7 @@ namespace v2dsynth
         [DllImport("user32.dll",SetLastError = true, EntryPoint = "SendMessage")]
         static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
-        void Msg(string msg) => scr = scr;//MessageBox.Show(msg, "Virtual2d 発声ウインドウ");
+        void Msg(string msg) => MessageBox.Show(msg, "Virtual2d 発声ウインドウ");
 
         public Form1()
         {
