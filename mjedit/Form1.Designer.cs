@@ -85,6 +85,8 @@
             this.label25 = new System.Windows.Forms.Label();
             this.mouthPointerSize = new System.Windows.Forms.NumericUpDown();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.aniluaList = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.bodyY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bodyCentY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bodySize)).BeginInit();
@@ -775,11 +777,31 @@
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(322, 19);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(84, 12);
+            this.label26.TabIndex = 62;
+            this.label26.Text = "AniLuaプラグイン";
+            // 
+            // aniluaList
+            // 
+            this.aniluaList.FormattingEnabled = true;
+            this.aniluaList.ItemHeight = 12;
+            this.aniluaList.Location = new System.Drawing.Point(322, 34);
+            this.aniluaList.Name = "aniluaList";
+            this.aniluaList.Size = new System.Drawing.Size(255, 364);
+            this.aniluaList.TabIndex = 63;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 402);
+            this.ClientSize = new System.Drawing.Size(778, 402);
+            this.Controls.Add(this.aniluaList);
+            this.Controls.Add(this.label26);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.mouthPointerSize);
             this.Controls.Add(this.label25);
@@ -835,8 +857,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(343, 441);
-            this.MinimumSize = new System.Drawing.Size(343, 441);
             this.Name = "Form1";
             this.Text = "model.jsonエディター";
             ((System.ComponentModel.ISupportInitialize)(this.bodyY)).EndInit();
@@ -925,6 +945,8 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.NumericUpDown mouthPointerSize;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.ListBox aniluaList;
     }
 }
 

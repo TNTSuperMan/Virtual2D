@@ -41,7 +41,7 @@ namespace mjedit
                 BodyY = (int)bodyY.Value,
                 BodyCentY = (int)bodyCentY.Value,
                 BodySize = (int)bodySize.Value,
-                neckY = (int)neckY.Value,
+                NeckY = (int)neckY.Value,
                 HeadY = (int)headY.Value,
                 HeadSize = (int)headSize.Value,
                 EyePos = (int)eyePos.Value,
@@ -104,7 +104,7 @@ namespace mjedit
                 bodyY.Value = model.BodyY;
                 bodyCentY.Value = model.BodyCentY;
                 bodySize.Value = model.BodySize;
-                neckY.Value = model.neckY;
+                neckY.Value = model.NeckY;
                 headY.Value = model.HeadY;
                 headSize.Value = model.HeadSize;
                 eyePos.Value = model.EyePos;
@@ -177,7 +177,7 @@ namespace mjedit
             public int BodyY { get; set; }
             public int BodyCentY { get; set; }
             public int BodySize { get; set; }
-            public int neckY { get; set; }
+            public int NeckY { get; set; }
             public int HeadY { get; set; }
             public int HeadSize { get; set; }
             public int EyePos { get; set; }

@@ -49,7 +49,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         stg.BodySize);
 
     head = new Sprite(HeadImage,
-        vct2d(), vct2d(0, stg.neckY),
+        vct2d(), vct2d(0, stg.NeckY),
         stg.HeadSize);
 
     eye1 = new Sprite(EyeImage,

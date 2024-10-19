@@ -25,7 +25,7 @@ Setting::Setting() {
 		set(BodyY);
 		set(BodyCentY);
 		set(BodySize);
-		set(neckY);
+		set(NeckY);
 		set(HeadY);
 		set(HeadSize);
 		set(EyePos);
@@ -45,9 +45,9 @@ Setting::Setting() {
 		set(CloseMouthSize);
 		set(MouthY);
 		set(MouthPointerSize);
-		if (j["aniluas"].is_array()) {
+		if (j["Aniluas"].is_array()) {
 			SetStartMs();
-			for (json::iterator it = j["aniluas"].begin(); it != j["aniluas"].end(); ++it) {
+			for (json::iterator it = j["Aniluas"].begin(); it != j["Aniluas"].end(); ++it) {
 				AddAniLua(AniLua(*it));
 			}
 		}
