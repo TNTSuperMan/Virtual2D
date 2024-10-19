@@ -13,9 +13,10 @@ Setting::Setting() {
 	char c;
 	json j;
 	std::string fd;
-	while ((c = cfg.get()) != -1) {
+	ClearAniLua();
+	while ((c = cfg.get()) != -1)
 		fd += c;
-	}
+	
 	cfg.close();
 	try {
 		j = json::parse(fd);
@@ -24,7 +25,7 @@ Setting::Setting() {
 		set(BodyY);
 		set(BodyCentY);
 		set(BodySize);
-		set(neckY);
+		set(NeckY);
 		set(HeadY);
 		set(HeadSize);
 		set(EyePos);
@@ -44,6 +45,12 @@ Setting::Setting() {
 		set(CloseMouthSize);
 		set(MouthY);
 		set(MouthPointerSize);
+		if (j["Aniluas"].is_array()) {
+			SetStartMs();
+			for (json::iterator it = j["Aniluas"].begin(); it != j["Aniluas"].end(); ++it) {
+				AddAniLua(AniLua(*it));
+			}
+		}
 		if (HeadPointerSize == 0) {
 			Dialog(".\\model\\model.jsonÇÃê›íË\"HeadPointerSize\"Ç™0Ç≈Ç∑ÅB\n0à»äOÇ…ÇµÇƒÇ≠ÇæÇ≥Ç¢ÅB");
 			return;

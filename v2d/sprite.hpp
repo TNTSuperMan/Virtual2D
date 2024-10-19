@@ -20,6 +20,7 @@ public:
 	double Size; //‘å‚«‚³@100‚ªŠî€
 	double Deg; //‰ñ“]@360“x‚Åˆê‰ñ“]‚¾Ö
 	void Draw();
+	void SetGraphic(int image);
 	Sprite();
 	Sprite(int i,vct2d p, vct2d c, double s, int hanten = 0);
 };

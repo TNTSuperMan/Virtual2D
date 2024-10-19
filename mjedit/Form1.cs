@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -35,13 +36,16 @@ namespace mjedit
         {
             if (!isOkEdit) return;
             if (!isOpen) return;
+            List<string> aniluas = new List<string>();
+            foreach(object p in aniluaList.Items)
+                aniluas.Add(p.ToString());
             Model model = new Model
             {
                 backgroundColor = (uint)colorDialog1.Color.ToArgb(),
                 BodyY = (int)bodyY.Value,
                 BodyCentY = (int)bodyCentY.Value,
                 BodySize = (int)bodySize.Value,
-                neckY = (int)neckY.Value,
+                NeckY = (int)neckY.Value,
                 HeadY = (int)headY.Value,
                 HeadSize = (int)headSize.Value,
                 EyePos = (int)eyePos.Value,
@@ -61,7 +65,8 @@ namespace mjedit
                 MouthPointerSize = (int)mouthPointerSize.Value,
                 MabatakiKankaku = (int)mabatakiKankaku.Value,
                 MabatakiSize = (int)mabatakiSize.Value,
-                MabatakiTime = (int)mabatakiTime.Value
+                MabatakiTime = (int)mabatakiTime.Value,
+                Aniluas = aniluas
             };
             string jstr = JsonSerializer.Serialize(model);
             File.WriteAllText(fpath, jstr);
@@ -80,12 +85,12 @@ namespace mjedit
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (modeljsonDialog.ShowDialog() == DialogResult.OK)
             {
-                textBox1.Text = openFileDialog1.FileName;
+                textBox1.Text = modeljsonDialog.FileName;
                 isOkEdit = false;
                 isOpen = true;
-                fpath = openFileDialog1.FileName;
+                fpath = modeljsonDialog.FileName;
                 object originobj = null;
                 try
                 {
@@ -104,7 +109,7 @@ namespace mjedit
                 bodyY.Value = model.BodyY;
                 bodyCentY.Value = model.BodyCentY;
                 bodySize.Value = model.BodySize;
-                neckY.Value = model.neckY;
+                neckY.Value = model.NeckY;
                 headY.Value = model.HeadY;
                 headSize.Value = model.HeadSize;
                 eyePos.Value = model.EyePos;
@@ -121,13 +126,14 @@ namespace mjedit
                 mouthY.Value = model.MouthY;
                 mouthSize.Value = model.MouthSize;
                 mouthPointerSize.Value = model.MouthPointerSize;
-                mouthSize.Value = model.MouthSize;
                 closeMouthSize.Value = model.CloseMouthSize;
-                mouthY.Value = model.MouthY;
-                mouthPointerSize.Value = model.MouthPointerSize;
                 mabatakiKankaku.Value = model.MabatakiKankaku;
                 mabatakiSize.Value = model.MabatakiSize;
                 mabatakiTime.Value = model.MabatakiTime;
+                aniluaList.Items.Clear();
+                foreach(string p in model.Aniluas)
+                    aniluaList.Items.Add(p);
+                
                 isOkEdit = true;
             }
         }
@@ -177,7 +183,7 @@ namespace mjedit
             public int BodyY { get; set; }
             public int BodyCentY { get; set; }
             public int BodySize { get; set; }
-            public int neckY { get; set; }
+            public int NeckY { get; set; }
             public int HeadY { get; set; }
             public int HeadSize { get; set; }
             public int EyePos { get; set; }
@@ -198,6 +204,50 @@ namespace mjedit
             public int CloseMouthSize { get; set; }
             public int MouthY { get; set; }
             public int MouthPointerSize { get; set; }
+            public List<string> Aniluas { get; set; }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if(aniluaDialog.ShowDialog() == DialogResult.OK)
+            {
+                aniluaPathBox.Text = aniluaDialog.FileName;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            aniluaList.Items.Add(aniluaPathBox.Text);
+            chg(sender, e);
+        }
+
+        private void aniluaDeleteBox_Click(object sender, EventArgs e)
+        {
+            if(aniluaList.SelectedIndex != -1)
+            {
+                aniluaList.Items.RemoveAt(aniluaList.SelectedIndex);
+                chg(sender, e);
+            }
+        }
+
+        private void aniluaOpenBox_Click(object sender, EventArgs e)
+        {
+            if(aniluaList.SelectedIndex != -1)
+            {
+                Process.Start(aniluaList.SelectedItem.ToString());
+            }
+        }
+
+        private void aniluaUpBox_Click(object sender, EventArgs e)
+        {
+            if(aniluaList.SelectedIndex > 0)
+            {
+                int i = aniluaList.SelectedIndex;
+                object t = aniluaList.Items[i - 1];
+                aniluaList.Items[i - 1] = aniluaList.Items[i];
+                aniluaList.Items[i] = t;
+                chg(sender, e);
+            }
         }
     }
 }

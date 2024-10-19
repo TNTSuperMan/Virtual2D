@@ -64,9 +64,6 @@ LRESULT CALLBACK SpeakerAddProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
     case 0xBAFA:
         isNeedReload = true;
         return 4545; break;
-    case 0xBEEF:
-        AniLuaMsg(wp, lp);
-        return 1919; break;
     }
     return DefWindowProc(hWnd, msg, wp, lp);
 }

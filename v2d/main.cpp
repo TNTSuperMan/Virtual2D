@@ -49,7 +49,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         stg.BodySize);
 
     head = new Sprite(HeadImage,
-        vct2d(), vct2d(0, stg.neckY),
+        vct2d(), vct2d(0, stg.NeckY),
         stg.HeadSize);
 
     eye1 = new Sprite(EyeImage,
@@ -162,10 +162,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         mouth->Deg = head->Deg;
 
         #pragma endregion
-
-        GetAniluaState(head, body, eye1, eye2, mouth);
         
         draw:
+        GetAniluaState(head, body, eye1, eye2, mouth);
+
         head->Draw();
         body->Draw();
         eye1->Draw();
