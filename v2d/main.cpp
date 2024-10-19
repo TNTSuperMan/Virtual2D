@@ -38,7 +38,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     clsDx();
     Initializer::Image(BodyImage, HeadImage, EyeImage, MouthImage, MouthCloseImage);
     stg = Setting();
-    if (!stg.isInitialized) goto vtubeloop;
+    if (!stg.isInitialized) return -1;
     starttime = GetNowCount();
     nl = HEIGHT - stg.HeadY;
     ep = HEIGHT - stg.EyePos;
